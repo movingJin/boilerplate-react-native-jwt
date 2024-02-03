@@ -8,7 +8,8 @@
 
 import React, { Component } from 'react';
 import {Node} from 'react';
-import Map from './src/map'
+import { NavigationContainer } from '@react-navigation/native';
+import TabNavigation from './src/Tab';
 
 import {
   SafeAreaView,
@@ -59,7 +60,9 @@ class App extends Component {
     return (
       <>
         <View style={{ flex: 1 }}>
-          <Map></Map>
+          <NavigationContainer>
+              <TabNavigation />
+          </NavigationContainer>
         </View>
       </>
     );
