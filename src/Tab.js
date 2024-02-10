@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Map from './Map'
 import News from './News'
-import GptNews from './GptNews'
 
 const Tab = createBottomTabNavigator();
 
@@ -22,6 +21,7 @@ const TabNavigation = () => {
             <Tab.Screen
                 name='News'
                 component={News}
+                initialParams={{title: "Real Estate News"}}
                 options={{
                     tabBarIcon: ({color, size}) => (
                         <Icon name="newspaper" color={color} size={size} />
@@ -29,8 +29,9 @@ const TabNavigation = () => {
                 }}
                 />
             <Tab.Screen
-                name='GptNews'
-                component={GptNews}
+                name='Gpt Article'
+                component={News}
+                initialParams={{title: "GPT article"}}
                 options={{
                     tabBarIcon: ({color, size}) => (
                         <Icon name="article" color={color} size={size} />
