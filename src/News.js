@@ -28,7 +28,7 @@ export default class News extends Component {
     };
   }
 
-  toggleModal = (item=null) => {
+  toggleModal = (item) => {
     this.setState({
       isModalVisible: !this.state.isModalVisible
     });
@@ -51,12 +51,12 @@ export default class News extends Component {
 
   renderItem=({item})=>{
     return(
-      <TouchableOpacity style={style.itemView} onPress={() => this.toggleModal(item)}>
-          {/* <Image source={item.img} style={style.itemImg}></Image> */}
+      <TouchableOpacity style={style.listView} onPress={() => this.toggleModal(item)}>
+          {/* <Image source={item.img} style={style.listImg}></Image> */}
           <View style={{flexDirection:'column'}}>
-              <Text style={style.itemTitle}>{item.title}</Text>
+              <Text style={style.listTitle}>{item.title}</Text>
               <Text style={style.itemBody}>{item.body}</Text>
-              <View style={{flexDirection:'row'}}>
+              <View style={style.footer}>
                 <Text style={style.itemPublisher}>{item.publisher}</Text>
                 <Text style={style.itemIssueDate}>{item.issueDate}</Text>
               </View>
@@ -89,7 +89,7 @@ export default class News extends Component {
           <View style={style.modelWrapperStyle}>
             <Text style={style.itemTitle}>{this.state.selectedItem.title}</Text>
             <Text style={style.itemBody}>{this.state.selectedItem.body}</Text>
-            <View style={{flexDirection:'row'}}>
+            <View style={style.footer}>
               <Text style={style.itemPublisher}>{this.state.selectedItem.publisher}</Text>
               <Text style={style.itemIssueDate}>{this.state.selectedItem.issueDate}</Text>
             </View>
@@ -106,24 +106,24 @@ const style= StyleSheet.create({
     fontSize:24,
     fontWeight:'bold',
     textAlign:'center',
-    paddingBottom:16,
+    paddingBottom:16
   },
-  itemView:{
+  listView:{
     flexDirection:'row',
     borderWidth:1,
     borderRadius:4,
     padding:8,
-    marginBottom:12,
+    marginBottom:12
   },
-  itemImg:{
+  listImg:{
     width:120,
     height:100,
     resizeMode:'cover',
-    marginRight:8,
+    marginRight:8
   },
-  itemTitle:{
+  listTitle:{
     fontSize:18,
-    fontWeight:'bold',
+    fontWeight:'bold'
   },
   itemBody:{
       fontSize:16
@@ -142,10 +142,18 @@ const style= StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
   modelWrapperStyle: {
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#ffffff',
     padding: 20,
     width: '90%'
+  },
+  itemTitle:{
+    fontSize:18,
+    fontWeight:'bold',
+    textAlign:'center'
+  },
+  footer: {
+    flexDirection:'row',
+    textAlign: 'left',
+    marginTop: 8
   }
 });
