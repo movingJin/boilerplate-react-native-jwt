@@ -1,6 +1,5 @@
 import React, {Component, useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Modal, Image} from 'react-native';
-//import {TouchableOpacity} from 'react-native-gesture-handler';
 import { FlashList } from "@shopify/flash-list";
 
 export default class News extends Component {
@@ -57,17 +56,6 @@ export default class News extends Component {
 
   popupItem=()=>{
     return(
-    // <Modal
-    //   visible={this.state.isModalVisible}
-    //   transparent={true}
-    //   animationType='slide'
-    //   onRequestClose={this.toggleModal}
-    // >
-    //   <View style={{flexDirection:'column'}}>
-    //     <Text style={style.itemHeader}>{this.state.selectedItem.header}</Text>
-    //     <Text style={style.itemHeader}>{this.state.selectedItem.header}</Text>
-    //   </View>
-    // </Modal>
       <Modal
       visible={this.state.isModalVisible}
       transparent={true}
