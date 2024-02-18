@@ -45,16 +45,16 @@ class Map extends Component{
         }}
       >
         {gus.map(gu => (
-        <Polygon
-          key={gu}
-          tappable={true}
-          onPress={() => this.polygonMouseOver(gu)}
-          coordinates={coords[gu]}
-          strokeColor="#000000" // fallback for when `strokeColors` is not supported by the map-provider
-          strokeWeight="2"
-          fillColor="rgba(0,0,255,0.35)"
-          fillOpacity="0.35"
-        />
+          <Polygon
+            key={gu}
+            tappable={true}
+            onPress={() => this.polygonMouseOver(gu)}
+            coordinates={coords[gu]}
+            strokeColor="#000000" // fallback for when `strokeColors` is not supported by the map-provider
+            strokeWeight="2"
+            fillColor="rgba(0,0,255,0.35)"
+            fillOpacity="0.35"
+          />
         ))}
       </MapView>
     );
