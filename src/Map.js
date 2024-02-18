@@ -8,9 +8,10 @@
 
 import React, {Component, useState, useEffect} from 'react';
 import {Node} from 'react';
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import Geolocation from 'react-native-geolocation-service';
 import { PermissionsAndroid } from 'react-native';
+import MapView, { PROVIDER_GOOGLE, Polygon} from "react-native-maps";
+import coords from "../gu.json"
 
 class Map extends Component{
 
@@ -19,36 +20,43 @@ class Map extends Component{
     // const [longitude, setLogitude] = useState(null);
     const granted = await PermissionsAndroid.check( PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION );
     if (granted) {
-      // Geolocation.getCurrentPosition(
-      //   position => {
-      //     const latitude = JSON.stringify(position.coords.latitude);
-      //     const longitude = JSON.stringify(position.coords.longitude);
 
-      //     setLatitude(latitude);
-      //     setLogitude(longitude);
-      //   },
-      //   error => {
-      //     console.log(error.code, error.message);
-      //   },
-      //   {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-      // );
     } 
     else {
       console.log( "ACCESS_FINE_LOCATION permission denied" );
     }
   }
+
+  polygonMouseOver = (key) =>{
+    console.log(key);
+  }
+
   render() {
+    const gus = Object.keys(coords);
     return (
       <MapView
-          style={{ flex: 1 }}
-          provider={PROVIDER_GOOGLE}
-          initialRegion={{
-          latitude: 37.57002,
-          longitude: 126.97962,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-          }}
-      />
+        style={{ flex: 1 }}
+        provider={PROVIDER_GOOGLE}
+        initialRegion={{
+        latitude: 37.57002,
+        longitude: 126.97962,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+        }}
+      >
+        {gus.map(gu => (
+        <Polygon
+          key={gu}
+          tappable={true}
+          onPress={() => this.polygonMouseOver(gu)}
+          coordinates={coords[gu]}
+          strokeColor="#000000" // fallback for when `strokeColors` is not supported by the map-provider
+          strokeWeight="2"
+          fillColor="rgba(0,0,255,0.35)"
+          fillOpacity="0.35"
+        />
+        ))}
+      </MapView>
     );
   }
 }
