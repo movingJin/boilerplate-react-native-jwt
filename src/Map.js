@@ -21,7 +21,15 @@ class Map extends Component{
     this.state={
       datas: [
         {header: "제목1", body:"본문1", issueDate: '2024-02-04', publisher: '동아일보', author:'이동진', img:'require(그림경로)'},
-        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'박지연', img:'require(그림경로)'}
+        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'박지연', img:'require(그림경로)'},
+        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
+        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
+        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
+        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
+        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
+        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
+        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
+        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'}
       ],
       isModalVisible: false
     };
