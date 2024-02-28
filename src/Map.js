@@ -170,7 +170,7 @@ const style= StyleSheet.create({
   modelWrapperStyle: {
     backgroundColor: '#ffffff',
     padding: 20,
-    width: '90%',
+    width: '80%',
     height: '90%'
   },
   itemHeader:{

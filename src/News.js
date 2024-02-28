@@ -1,5 +1,5 @@
 import React, {Component, useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Modal, Image} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Modal, Image} from 'react-native';
 import { FlashList } from "@shopify/flash-list";
 
 export default class News extends Component {
@@ -62,16 +62,18 @@ export default class News extends Component {
       animationType='slide'
       onRequestClose={() => this.toggleModal(null)}
       >
-        <View style={style.modelStyle}>
-          <View style={style.modelWrapperStyle}>
-            <Text style={style.itemHeader}>{this.state.selectedItem.header}</Text>
-            <Text style={style.itemBody}>{this.state.selectedItem.body}</Text>
-            <View style={style.footer}>
-              <Text style={style.itemPublisher}>{this.state.selectedItem.publisher}</Text>
-              <Text style={style.itemIssueDate}>{this.state.selectedItem.issueDate}</Text>
+        <TouchableOpacity style={style.modelStyle} onPress={() => this.setState({isModalVisible: false})}>
+          <TouchableWithoutFeedback onPress={() => {}}>
+            <View style={style.modelWrapperStyle}>
+              <Text style={style.itemHeader}>{this.state.selectedItem.header}</Text>
+              <Text style={style.itemBody}>{this.state.selectedItem.body}</Text>
+              <View style={style.footer}>
+                <Text style={style.itemPublisher}>{this.state.selectedItem.publisher}</Text>
+                <Text style={style.itemIssueDate}>{this.state.selectedItem.issueDate}</Text>
+              </View>
             </View>
-          </View>
-        </View>
+            </TouchableWithoutFeedback>
+        </TouchableOpacity>
       </Modal>
     )
   }
@@ -121,7 +123,7 @@ const style= StyleSheet.create({
   modelWrapperStyle: {
     backgroundColor: '#ffffff',
     padding: 20,
-    width: '90%'
+    width: '80%'
   },
   itemHeader:{
     fontSize:18,
