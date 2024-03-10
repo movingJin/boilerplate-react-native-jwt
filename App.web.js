@@ -1,12 +1,30 @@
-import React from 'react'
-import {View, Text} from 'react-native';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
 
-function App() {
-  return (
-    <View>
-      <Text>Hello world from react</Text>
-    </View>
-  )
-}
+import React, { Component } from 'react';
+import {Node} from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import TabNavigation from './src/Tab.web';
 
-export default App
+import {View} from 'react-native';
+
+class App extends Component {
+  render(){
+    return (
+      <>
+        <View style={{ flex: 1 }}>
+          <NavigationContainer>
+              <TabNavigation />
+          </NavigationContainer>
+        </View>
+      </>
+    );
+  }
+};
+
+export default App;

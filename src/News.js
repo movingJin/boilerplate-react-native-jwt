@@ -80,7 +80,7 @@ export default class News extends Component {
 }
 
 const style= StyleSheet.create({
-  root:{flex:1, padding:16,},
+  root:{flexGrow:1, padding:16,},
   titleText:{
     fontSize:24,
     fontWeight:'bold',
