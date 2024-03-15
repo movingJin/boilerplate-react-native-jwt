@@ -1,6 +1,7 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Map from './Map.web'
 import News from './News'
 
 const Tab = createMaterialTopTabNavigator();
@@ -8,6 +9,15 @@ const Tab = createMaterialTopTabNavigator();
 const TabNavigation = () => {
     return (
         <Tab.Navigator screenOptions={{ headerShown: false }}>
+            <Tab.Screen
+                name='Map'
+                component={Map}
+                options={{
+                    tabBarIcon: ({color, size}) => (
+                        <Icon name="map" color={color} size={size} />
+                      )
+                }}
+                />
             <Tab.Screen
                 name='News'
                 component={News}
