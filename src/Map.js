@@ -11,7 +11,7 @@ import {Pressable, View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFee
 import {Node} from 'react';
 import Geolocation from 'react-native-geolocation-service';
 import { PermissionsAndroid } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Polygon} from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE, Polygon} from "react-native-maps";
 import { FlashList } from "@shopify/flash-list";
 import coords from "../gu.json"
 
@@ -30,6 +30,10 @@ class Map extends Component{
         {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
         {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
         {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'}
+      ],
+      points: [
+        {key: 1, address: "서울시 영등포구 신길로 15나길 11 (글로리홈)", latitude: 37.4973234106675, longitude: 126.905182497904, last_edit_time: "2024-03-19"},
+        {key: 2, address: "서울시 영등포구 신길로 15나길 12 (temp)", latitude: 37.4974318381051, longitude: 126.905340228462, last_edit_time: "2000-01-01"}
       ],
       isModalVisible: false
     };
@@ -59,7 +63,6 @@ class Map extends Component{
   };
 
   render() {
-    const gus = Object.keys(coords);
     return (
       <View style={style.root}>
         <MapView
@@ -72,16 +75,13 @@ class Map extends Component{
           longitudeDelta: 0.0421,
           }}
         >
-          {gus.map(gu => (
-            <Polygon
-              key={gu}
-              tappable={true}
-              onPress={() => this.polygonMouseOver(gu)}
-              coordinates={coords[gu]}
-              strokeColor="#000000" // fallback for when `strokeColors` is not supported by the map-provider
-              strokeWeight="2"
-              fillColor="rgba(0,0,255,0.35)"
-              fillOpacity="0.35"
+          {this.state.points.map(point => (
+            <Marker
+              key={point.key}
+              coordinate={{latitude: point.latitude, longitude: point.longitude}}
+              title={point.address}
+              description={point.last_edit_time}
+              onCalloutPress={() => this.polygonMouseOver(point.address)}
             />
           ))}
         </MapView>
