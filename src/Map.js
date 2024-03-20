@@ -33,7 +33,8 @@ class Map extends Component{
       ],
       points: [
         {key: 1, address: "서울시 영등포구 신길로 15나길 11 (글로리홈)", latitude: 37.4973234106675, longitude: 126.905182497904, last_edit_time: "2024-03-19"},
-        {key: 2, address: "서울시 영등포구 신길로 15나길 12 (temp)", latitude: 37.4974318381051, longitude: 126.905340228462, last_edit_time: "2000-01-01"}
+        {key: 2, address: "서울시 영등포구 신길로 15나길 12 (temp)", latitude: 37.4974318381051, longitude: 126.905340228462, last_edit_time: "2000-01-01"},
+        {key: 3, address: "서울시 종로구 종로33길 15 (연강빌딩)", latitude: 37.571812327, longitude: 127.001000105, last_edit_time: "2000-01-01"}
       ],
       isModalVisible: false
     };
