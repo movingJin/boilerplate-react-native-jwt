@@ -72,7 +72,7 @@ export default class News extends Component {
                 <Text style={style.itemIssueDate}>{this.state.selectedItem.issueDate}</Text>
               </View>
             </View>
-            </TouchableWithoutFeedback>
+          </TouchableWithoutFeedback>
         </TouchableOpacity>
       </Modal>
     )

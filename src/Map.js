@@ -13,7 +13,7 @@ import Geolocation from 'react-native-geolocation-service';
 import { PermissionsAndroid } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Polygon} from "react-native-maps";
 import { FlashList } from "@shopify/flash-list";
-import coords from "../gu.json"
+import ReviewDetail from './ReviewDetail';
 
 class Map extends Component{
   constructor(props){
@@ -36,7 +36,8 @@ class Map extends Component{
         {key: 2, address: "서울시 영등포구 신길로 15나길 12 (temp)", latitude: 37.4974318381051, longitude: 126.905340228462, last_edit_time: "2000-01-01"},
         {key: 3, address: "서울시 종로구 종로33길 15 (연강빌딩)", latitude: 37.571812327, longitude: 127.001000105, last_edit_time: "2000-01-01"}
       ],
-      isModalVisible: false
+      isModalVisible: false,
+      isDetailVisible: false
     };
   }
 
@@ -87,9 +88,24 @@ class Map extends Component{
           ))}
         </MapView>
         {this.state.isModalVisible && this.popupItem()}
+        {this.state.isDetailVisible && this.popupDetail()}
       </View>
     );
   }
+
+  popupDetail=()=>{
+    return(
+      <Modal
+      visible={this.state.isDetailVisible}
+      animationType='slide'
+      onRequestClose={() => this.setState({isDetailVisible: !this.state.isDetailVisible})}>
+        <ReviewDetail>
+
+        </ReviewDetail>
+      </Modal>
+    )
+  }
+
 
   popupItem=()=>{
     return(
@@ -119,7 +135,7 @@ class Map extends Component{
 
   renderItem=({item})=>{
     return(
-      <TouchableOpacity style={style.listView} onPress={() => this.toggleModal(item)}>
+      <TouchableOpacity style={style.listView} onPress={() => this.setState({isDetailVisible: true})}>
           {/* <Image source={item.img} style={style.listImg}></Image> */}
           <View style={{flexDirection:'column'}}>
               <Text style={style.listHeader}>{item.header}</Text>
