@@ -20,23 +20,25 @@ class Map extends Component{
     super(props);
     this.state={
       datas: [
-        {header: "제목1", body:"본문1", issueDate: '2024-02-04', publisher: '동아일보', author:'이동진', img:'require(그림경로)'},
-        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'박지연', img:'require(그림경로)'},
-        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
-        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
-        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
-        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
-        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
-        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
-        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'},
-        {header: "제목2", body:"본문2", issueDate: '2024-02-04', publisher: '조선일보', author:'홍길동', img:'require(그림경로)'}
+        {id: 1, title: "203호 살았던 사람입니다.", body: "룸컨디션 좋습니다.", rating: 5, lastEditTime: "2024-03-19", img:'require(그림경로)'},
+        {id: 2, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 3, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 4, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 5, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 6, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 7, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 8, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 9, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 10, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 11, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'}
       ],
       points: [
-        {key: 1, address: "서울시 영등포구 신길로 15나길 11 (글로리홈)", latitude: 37.4973234106675, longitude: 126.905182497904, last_edit_time: "2024-03-19"},
-        {key: 2, address: "서울시 영등포구 신길로 15나길 12 (temp)", latitude: 37.4974318381051, longitude: 126.905340228462, last_edit_time: "2000-01-01"},
-        {key: 3, address: "서울시 종로구 종로33길 15 (연강빌딩)", latitude: 37.571812327, longitude: 127.001000105, last_edit_time: "2000-01-01"}
+        {key: 1, address: "서울시 영등포구 신길로 15나길 11 (글로리홈)", latitude: 37.4973234106675, longitude: 126.905182497904, lastEditTime: "2024-03-19"},
+        {key: 2, address: "서울시 영등포구 신길로 15나길 12 (temp)", latitude: 37.4974318381051, longitude: 126.905340228462, lastEditTime: "2000-01-01"},
+        {key: 3, address: "서울시 종로구 종로33길 15 (연강빌딩)", latitude: 37.571812327, longitude: 127.001000105, lastEditTime: "2000-01-01"}
       ],
-      isModalVisible: false,
+      selectedReview: null,
+      isReviewListVisible: false,
       isDetailVisible: false
     };
   }
@@ -53,15 +55,20 @@ class Map extends Component{
     }
   }
 
-  polygonMouseOver = (key) =>{
+  pressMarkerCallout = (key) =>{
     console.log(key);
     this.toggleModal();
   }
 
   toggleModal = () => {
     this.setState({
-      isModalVisible: !this.state.isModalVisible
+      isReviewListVisible: !this.state.isReviewListVisible
     });
+  };
+
+  selectReview = (review) => {
+    this.setState({selectedReview: review});
+    this.setState({isDetailVisible: true});
   };
 
   render() {
@@ -82,47 +89,32 @@ class Map extends Component{
               key={point.key}
               coordinate={{latitude: point.latitude, longitude: point.longitude}}
               title={point.address}
-              description={point.last_edit_time}
-              onCalloutPress={() => this.polygonMouseOver(point.address)}
+              description={point.lastEditTime}
+              onCalloutPress={() => this.pressMarkerCallout(point.address)}
             />
           ))}
         </MapView>
-        {this.state.isModalVisible && this.popupItem()}
+        {this.state.isReviewListVisible && this.popupReviewList()}
         {this.state.isDetailVisible && this.popupDetail()}
       </View>
     );
   }
 
-  popupDetail=()=>{
+  popupReviewList=()=>{
     return(
       <Modal
-      visible={this.state.isDetailVisible}
-      animationType='slide'
-      onRequestClose={() => this.setState({isDetailVisible: !this.state.isDetailVisible})}>
-        <ReviewDetail>
-
-        </ReviewDetail>
-      </Modal>
-    )
-  }
-
-
-  popupItem=()=>{
-    return(
-      <Modal
-      visible={this.state.isModalVisible}
+      visible={this.state.isReviewListVisible}
       transparent={true}
       animationType='slide'
       onRequestClose={() => this.toggleModal()}
       >
-        <TouchableOpacity style={style.modelStyle} onPress={() => this.setState({isModalVisible: false})}>
+        <TouchableOpacity style={style.modelStyle} onPress={() => this.setState({isReviewListVisible: false})}>
           <TouchableWithoutFeedback onPress={() => {}}>
             <View style={style.modelWrapperStyle}>
               <Text style={style.itemHeader}>헤더</Text>
               <Text style={style.itemBody}>바디</Text>
               <FlashList
                 data={this.state.datas}
-                //keyExtractor={()=>{}}
                 renderItem={this.renderItem}
                 estimatedItemSize={200}
                 />
@@ -135,20 +127,33 @@ class Map extends Component{
 
   renderItem=({item})=>{
     return(
-      <TouchableOpacity style={style.listView} onPress={() => this.setState({isDetailVisible: true})}>
+      <TouchableOpacity style={style.listView} onPress={() => this.selectReview(item)}>
           {/* <Image source={item.img} style={style.listImg}></Image> */}
           <View style={{flexDirection:'column'}}>
-              <Text style={style.listHeader}>{item.header}</Text>
+              <Text style={style.listHeader}>{item.title}</Text>
               <Text style={style.itemBody}>{item.body}</Text>
               <View style={style.footer}>
-                <Text style={style.itemPublisher}>{item.publisher}</Text>
-                <Text style={style.itemIssueDate}>{item.issueDate}</Text>
+                <Text style={style.itemPublisher}>{item.rating}</Text>
+                <Text style={style.itemIssueDate}>{item.lastEditTime}</Text>
               </View>
           </View>
           
       </TouchableOpacity>
     );
   }
+
+  popupDetail=()=>{
+    return(
+      <Modal
+      visible={this.state.isDetailVisible}
+      animationType='slide'
+      onRequestClose={() => this.setState({isDetailVisible: !this.state.isDetailVisible})}>
+        <ReviewDetail review={this.state.selectedReview}>
+  
+        </ReviewDetail>
+      </Modal>
+    )
+  };
 }
 
 const style= StyleSheet.create({
