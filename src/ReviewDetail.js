@@ -21,10 +21,13 @@ export default class ReviewDetail extends Component {
     return (
       <View style={style.root}>
         <Text style={style.titleText}>{this.props.review.title}</Text>
-        <View style={style.header}>
-          <Text style={style.rating}>평점: {this.props.review.rating}</Text>
-          <Text style={style.lastEditTime}>마지막 수정일: {this.props.review.lastEditTime}</Text>
-        </View>
+        <Text >상세주소: {this.props.review.address}</Text>
+        <Text>보증금반환지연: {this.props.review.isReturnDelayed}</Text>
+        <Text>보증금: {this.props.review.deposit} (만원)</Text>
+        <Text>거주기간: {this.props.review.fromDate} ~ {this.props.review.toDate === "9999-12-31" ? "거주중": this.props.review.toDate}</Text>
+        <Text>계약일: {this.props.review.contractDate}</Text>
+        <Text style={style.rating}>평점: {this.props.review.rating}</Text>
+        <Text style={style.lastEditTime}>마지막 수정일: {this.props.review.lastEditTime}</Text>
         <Text style={style.body}>{this.props.review.body}</Text>
       </View>
     );

@@ -20,17 +20,17 @@ class Map extends Component{
     super(props);
     this.state={
       datas: [
-        {id: 1, title: "203호 살았던 사람입니다.", body: "룸컨디션 좋습니다.", rating: 5, lastEditTime: "2024-03-19", img:'require(그림경로)'},
-        {id: 2, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
-        {id: 3, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
-        {id: 4, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
-        {id: 5, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
-        {id: 6, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
-        {id: 7, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
-        {id: 8, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
-        {id: 9, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
-        {id: 10, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
-        {id: 11, title: "test_title", body: "Contests", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'}
+        {id: 1, title: "203호 살았던 사람입니다.", body: "룸컨디션 좋습니다.", address: "서울시 영등포구 신길로 15나길 11 (글로리홈) 203호", isReturnDelayed: false, deposit: 90000000, fromDate: "2019-12-31", toDate: "9999-12-31", contractDate: "2019-12-05", rating: 5, lastEditTime: "2024-03-19", img:'require(그림경로)'},
+        {id: 2, title: "test_title", body: "Contests", address: "연강빌딩 705호", isReturnDelayed: false, deposit: 90000000, fromDate: "2021-07-14", toDate: "", contractDate: "2021-07-01", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 3, title: "test_title", body: "Contests", address: "연강빌딩 705호", isReturnDelayed: false, deposit: 90000000, fromDate: "2021-07-14", toDate: "", contractDate: "2021-07-01", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 4, title: "test_title", body: "Contests", address: "연강빌딩 705호", isReturnDelayed: false, deposit: 90000000, fromDate: "2021-07-14", toDate: "", contractDate: "2021-07-01", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 5, title: "test_title", body: "Contests", address: "연강빌딩 705호", isReturnDelayed: false, deposit: 90000000, fromDate: "2021-07-14", toDate: "", contractDate: "2021-07-01", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 6, title: "test_title", body: "Contests", address: "연강빌딩 705호", isReturnDelayed: false, deposit: 90000000, fromDate: "2021-07-14", toDate: "", contractDate: "2021-07-01", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 7, title: "test_title", body: "Contests", address: "연강빌딩 705호", isReturnDelayed: false, deposit: 90000000, fromDate: "2021-07-14", toDate: "", contractDate: "2021-07-01", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 8, title: "test_title", body: "Contests", address: "연강빌딩 705호", isReturnDelayed: false, deposit: 90000000, fromDate: "2021-07-14", toDate: "", contractDate: "2021-07-01", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 9, title: "test_title", body: "Contests", address: "연강빌딩 705호", isReturnDelayed: false, deposit: 90000000, fromDate: "2021-07-14", toDate: "", contractDate: "2021-07-01", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 10, title: "test_title", body: "Contests", address: "연강빌딩 705호", isReturnDelayed: false, deposit: 90000000, fromDate: "2021-07-14", toDate: "", contractDate: "2021-07-01", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'},
+        {id: 11, title: "test_title", body: "Contests", address: "연강빌딩 705호", isReturnDelayed: false, deposit: 90000000, fromDate: "2021-07-14", toDate: "", contractDate: "2021-07-01", rating: 4, lastEditTime: "2023-11-05", img:'require(그림경로)'}
       ],
       points: [
         {key: 1, address: "서울시 영등포구 신길로 15나길 11 (글로리홈)", latitude: 37.4973234106675, longitude: 126.905182497904, lastEditTime: "2024-03-19"},
