@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import {Node} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './src/Tab';
+import AuthStackNavigator from './src/auth/AuthStackNavigator';
 
 import {View} from 'react-native';
 
@@ -18,9 +19,12 @@ class App extends Component {
     return (
       <>
         <View style={{ flex: 1 }}>
-          <NavigationContainer>
+          <AuthStackNavigator>
+          
+          </AuthStackNavigator>
+          {/* <NavigationContainer>
               <TabNavigation />
-          </NavigationContainer>
+          </NavigationContainer> */}
         </View>
       </>
     );
