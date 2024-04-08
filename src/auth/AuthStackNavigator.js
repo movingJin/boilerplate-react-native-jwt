@@ -28,16 +28,44 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginPage from './LoginPage';
-import HomePage from './HomePage';
+import SettingDrawerNavigator from '../settings/SettingDrawerNavigator';
+import HomeTab from '../HomeTab';
+// import { IconButton } from 'react-native-paper';
 
 const Stack = createStackNavigator();
+
+// const AuthStackNavigator = () => {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator initialRouteName="Login">
+//         <Stack.Screen name="Login" component={LoginPage} />
+//         <Stack.Screen name="Home" component={HomeTab}
+//           options={({ navigation }) => ({
+//             title: 'Info Desk',
+//             headerLeft: (/*navigation*/) => (
+//               <IconButton
+//                 icon="menu"
+//                 onPress={() => console.log("testbug0")/*navigation.openDrawer()*/}
+//               />
+//             ),
+//           })}/>
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// };
+
 
 const AuthStackNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginPage} />
-        <Stack.Screen name="Home" component={HomePage} />
+        <Stack.Screen name="Home" component={SettingDrawerNavigator}
+          options={() => ({
+            headerShown: false
+            // title: 'Info Desk',
+            // headerLeft: false
+          })}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

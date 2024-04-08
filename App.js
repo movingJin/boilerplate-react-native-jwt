@@ -9,7 +9,7 @@
 import React, { Component } from 'react';
 import {Node} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import TabNavigation from './src/Tab';
+import HomeTab from './src/HomeTab';
 import AuthStackNavigator from './src/auth/AuthStackNavigator';
 
 import {View} from 'react-native';
@@ -23,7 +23,7 @@ class App extends Component {
           
           </AuthStackNavigator>
           {/* <NavigationContainer>
-              <TabNavigation />
+              <HomeTab />
           </NavigationContainer> */}
         </View>
       </>
