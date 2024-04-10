@@ -28,8 +28,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginPage from './LoginPage';
-import SettingDrawerNavigator from '../settings/SettingDrawerNavigator';
-import HomeTab from '../HomeTab';
+import MainDrawerNavigator from '../MainDrawerNavigator';
 // import { IconButton } from 'react-native-paper';
 
 const Stack = createStackNavigator();
@@ -60,7 +59,7 @@ const AuthStackNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginPage} />
-        <Stack.Screen name="Home" component={SettingDrawerNavigator}
+        <Stack.Screen name="Main" component={MainDrawerNavigator}
           options={() => ({
             headerShown: false
             // title: 'Info Desk',

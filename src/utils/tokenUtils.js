@@ -22,7 +22,7 @@ export const signIn = async (email, password, navigation) => {
           'refreshToken': response.data.tokens.refreshToken,
           'email': response.data.email
         }))
-        navigation.navigate('Home');
+        navigation.navigate('Main');
       }
     } catch (error) {
       if(error.response.status === 401){
@@ -82,7 +82,7 @@ export const verifyTokens = async (navigation) => {
         ...Token,
         'accessToken': res.data.data.accessToken,
       }))
-      navigation.reset({routes: [{name: "HomeTab"}]});
+      navigation.reset({routes: [{name: "Main"}]});
 
     } catch(error){
       const code = error.response.data.code; 
@@ -93,7 +93,7 @@ export const verifyTokens = async (navigation) => {
       }
       // accessToken 정상, refreshToken 정상 -> 자동 로그인
       else{
-        navigation.reset({routes: [{name: "HomeTab"}]});
+        navigation.reset({routes: [{name: "Main"}]});
       }
     }
 
