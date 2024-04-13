@@ -28,7 +28,11 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginPage from './LoginPage';
+import HomeTab from '../HomeTab';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import MainDrawerNavigator from '../MainDrawerNavigator';
+import SettingPage from '../settings/SettingPage'
+import About from '../settings/About';
 // import { IconButton } from 'react-native-paper';
 
 const Stack = createStackNavigator();
@@ -59,12 +63,20 @@ const AuthStackNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginPage} />
-        <Stack.Screen name="Main" component={MainDrawerNavigator}
-          options={() => ({
-            headerShown: false
-            // title: 'Info Desk',
-            // headerLeft: false
+        <Stack.Screen name="Main" component={HomeTab}
+          options={({ navigation }) => ({
+            //headerShown: false
+            title: 'Info Desk',
+            headerLeft: false,
+            headerRight: () => (
+              <Icon 
+                name="settings"
+                size={24}
+                onPress={() => navigation.navigate('Settings')} />
+            ),
           })}/>
+          <Stack.Screen name="Settings" component={SettingPage} />
+          <Stack.Screen name="About" component={About} />
       </Stack.Navigator>
     </NavigationContainer>
   );

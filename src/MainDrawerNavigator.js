@@ -6,7 +6,6 @@ import {
   DrawerItemList,
   DrawerItem, } from "@react-navigation/drawer";
 import HomeTab from './HomeTab';
-import SettingDrawer from './settings/SettingDrawer';
 import { Button, TextInput, View } from 'react-native';
 import { signOut } from './utils/tokenUtils';
 
@@ -40,7 +39,6 @@ const MainDrawerNavigator = () => {
         drawerItemStyle: {
             display: 'none'
           }}} />
-      <Drawer.Screen name="Setting" component={SettingDrawer} options={{drawerLabel: 'SETTING'}} />
     </Drawer.Navigator>
   );
 }
