@@ -13,7 +13,7 @@ const showToast = (text) =>{
 
 export const signIn = async (email, password, navigation) => {
     try {
-      const response = await axios.post('http://118.32.227.130:28084/login', { email, password });
+      const response = await axios.post('http://192.168.0.3:28084/login', { email, password });
       console.log(response.data);
       await AsyncStorage.setItem('jwtToken', response.data.tokens.accessToken);
       if (response.status === 200){
@@ -38,7 +38,7 @@ export const signOut = async (navigation) => {
   const localData = await AsyncStorage.getItem("Tokens");
   const tokens = JSON.parse(localData);
   console.log(tokens.accessToken);
-  const response = await axios.post('http://118.32.227.130:28084/signout', {}, {headers: {'Authorization': "Bearer " + tokens.accessToken}});
+  const response = await axios.post('http://192.168.0.3:28084/signout', {}, {headers: {'Authorization': "Bearer " + tokens.accessToken}});
   if (response.status === 200){
     await AsyncStorage.removeItem('Tokens');
     navigation.navigate('Login');
