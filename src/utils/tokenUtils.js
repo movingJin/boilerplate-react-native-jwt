@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
-const URL = 'http://118.32.227.130:8084'
+const URL = 'http://118.32.227.130:58083'
 
 const showToast = (text) =>{
     Toast.show({
@@ -13,7 +13,7 @@ const showToast = (text) =>{
 
 export const signIn = async (email, password, navigation) => {
     try {
-      const response = await axios.post('http://192.168.0.3:28084/login', { email, password });
+      const response = await axios.post('http://192.168.0.3:58083/login', { email, password });
       console.log(response.data);
       await AsyncStorage.setItem('jwtToken', response.data.tokens.accessToken);
       if (response.status === 200){
@@ -38,7 +38,7 @@ export const signOut = async (navigation) => {
   const localData = await AsyncStorage.getItem("Tokens");
   const tokens = JSON.parse(localData);
   console.log(tokens.accessToken);
-  const response = await axios.post('http://192.168.0.3:28084/signout', {}, {headers: {'Authorization': "Bearer " + tokens.accessToken}});
+  const response = await axios.post('http://192.168.0.3:58083/signout', {}, {headers: {'Authorization': "Bearer " + tokens.accessToken}});
   if (response.status === 200){
     await AsyncStorage.removeItem('Tokens');
     navigation.navigate('Login');
