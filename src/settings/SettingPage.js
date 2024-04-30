@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, {Component, useState, useEffect} from 'react';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
     View,
     Text,
@@ -12,10 +13,38 @@ import { signOut } from '../utils/tokenUtils';
 export default class SettingPage extends Component{
     constructor(props){
         super(props);
+        this.state={
+            isAuthenticated: false
+        };
+    }
+    
+    async componentDidMount(){
+        const localData = await AsyncStorage.getItem("Tokens");
+        if (localData === null) {
+            this.setState({isAuthenticated: false});
+        } else {
+            this.setState({isAuthenticated: true});
+        }
+    }
+    componentDidUpdate(prevProps){
+        if(this.state.isAuthenticated !== prevProps.isAuthenticated){
+
+        }        
+    }
+    componentWillUnmount(){
+
     }
 
-    _navigate(){
+    _setIsAuthenticated  = (isAuthenticated) => {
+        this.setState({isAuthenticated: isAuthenticated});
+    }
+
+    _goToAbout(){
         this.props.navigation.navigate('About');
+    }
+
+    _goToLogIn(){
+        this.props.navigation.navigate('Login');
     }
 
     _checkLogout(){
@@ -23,7 +52,7 @@ export default class SettingPage extends Component{
             "Alert",
             "Are you sure?",
             [
-                {text: 'ok', onPress: () => signOut(this.props.navigation)},
+                {text: 'ok', onPress: () => signOut(this.props.navigation, this._setIsAuthenticated)},
                 {text: 'cancel', onPress: () => null},
             ],
             { cancelable: true }
@@ -35,14 +64,23 @@ export default class SettingPage extends Component{
             <View style={styles.container}>
                 <TouchableOpacity 
                     style={styles.wrapButton}
-                    onPress={this._navigate.bind(this)}>
+                    onPress={this._goToAbout.bind(this)}>
                     <Text>🏅 About</Text>
                 </TouchableOpacity>
-                <TouchableOpacity 
-                    style={styles.wrapButton}
-                    onPress={this._checkLogout.bind(this)}>
-                    <Text>🔓 Logout</Text>
-                </TouchableOpacity>
+                {this.state.isAuthenticated ? (<>
+                    <TouchableOpacity 
+                        style={styles.wrapButton}
+                        onPress={this._checkLogout.bind(this)}>
+                        <Text>🔓 Logout</Text>
+                    </TouchableOpacity>
+                </>) : (<>
+                    <TouchableOpacity 
+                        style={styles.wrapButton}
+                        onPress={this._goToLogIn.bind(this)}>
+                        <Text>🔑 Login</Text>
+                    </TouchableOpacity>
+                </>)
+                }
             </View>
         );
     }

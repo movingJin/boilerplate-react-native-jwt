@@ -34,14 +34,14 @@ export const signIn = async (email, password, navigation) => {
     }
 };
 
-export const signOut = async (navigation) => {
+export const signOut = async (navigation, _setIsAuthenticated) => {
   const localData = await AsyncStorage.getItem("Tokens");
   const tokens = JSON.parse(localData);
   console.log(tokens.accessToken);
   const response = await axios.post(`${URL}/signout`, {}, {headers: {'Authorization': "Bearer " + tokens.accessToken}});
   if (response.status === 200){
     await AsyncStorage.removeItem('Tokens');
-    navigation.navigate('Login');
+    _setIsAuthenticated(false);
   }
 };
 
