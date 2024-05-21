@@ -1,6 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import authStore from './authStore';
+
 const URL = 'http://192.168.0.3:58083'
 
 const showToast = (text) =>{
@@ -11,17 +13,17 @@ const showToast = (text) =>{
       });
 };
 
+const {setAccessToken, setRefreshToken, setEmail, clearTokens} = authStore.getState();
+
 export const signIn = async (email, password, navigation) => {
     try {
       const response = await axios.post(`${URL}/login`, { email, password });
       console.log(response.data);
-      await AsyncStorage.setItem('jwtToken', response.data.tokens.accessToken);
+      //await AsyncStorage.setItem('jwtToken', response.data.tokens.accessToken);
       if (response.status === 200){
-        AsyncStorage.setItem('Tokens', JSON.stringify({
-          'accessToken': response.data.tokens.accessToken,
-          'refreshToken': response.data.tokens.refreshToken,
-          'email': response.data.email
-        }))
+        setAccessToken(response.data.tokens.accessToken);
+        setRefreshToken(response.data.tokens.refreshToken);
+        setEmail(response.data.email);
         navigation.navigate('Main');
       }
     } catch (error) {
@@ -35,12 +37,11 @@ export const signIn = async (email, password, navigation) => {
 };
 
 export const signOut = async (navigation, _setIsAuthenticated) => {
-  const localData = await AsyncStorage.getItem("Tokens");
-  const tokens = JSON.parse(localData);
-  console.log(tokens.accessToken);
-  const response = await axios.post(`${URL}/signout`, {}, {headers: {'Authorization': "Bearer " + tokens.accessToken}});
+  const accessToken = authStore.getState().accessToken;
+  console.log(accessToken);
+  const response = await axios.post(`${URL}/signout`, {}, {headers: {'Authorization': "Bearer " + accessToken}});
   if (response.status === 200){
-    await AsyncStorage.removeItem('Tokens');
+    clearTokens();
     _setIsAuthenticated(false);
   }
 };

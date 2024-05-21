@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { signOut } from '../utils/tokenUtils';
+import authStore from '../utils/authStore';
 
 export default class SettingPage extends Component{
     constructor(props){
@@ -18,9 +19,9 @@ export default class SettingPage extends Component{
         };
     }
     
-    async componentDidMount(){
-        const localData = await AsyncStorage.getItem("Tokens");
-        if (localData === null) {
+    componentDidMount(){
+        const {accessToken} = authStore.getState();
+        if (accessToken === null) {
             this.setState({isAuthenticated: false});
         } else {
             this.setState({isAuthenticated: true});
@@ -29,7 +30,7 @@ export default class SettingPage extends Component{
     componentDidUpdate(prevProps){
         if(this.state.isAuthenticated !== prevProps.isAuthenticated){
 
-        }        
+        }
     }
     componentWillUnmount(){
 
