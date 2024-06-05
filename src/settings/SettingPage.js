@@ -48,6 +48,10 @@ export default class SettingPage extends Component{
         this.props.navigation.navigate('Login');
     }
 
+    _goSignUp(){
+        this.props.navigation.navigate('Signup');
+    }
+
     _checkLogout(){
         Alert.alert(
             "Alert",
@@ -79,6 +83,11 @@ export default class SettingPage extends Component{
                         style={styles.wrapButton}
                         onPress={this._goToLogIn.bind(this)}>
                         <Text>🔑 Login</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                        style={styles.wrapButton}
+                        onPress={this._goSignUp.bind(this)}>
+                        <Text>Sign Up</Text>
                     </TouchableOpacity>
                 </>)
                 }

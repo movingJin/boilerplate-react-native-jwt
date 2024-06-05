@@ -46,6 +46,23 @@ export const signOut = async (navigation, _setIsAuthenticated) => {
   }
 };
 
+export const sendAuthCode = async (email) => {
+  const response = await axios.post(`${URL}/emails/send-authcode`, {email});
+  showToast("인증코드전송", `${email} 로 전송했습니다. 30분 내로 인증코드 메일이 도착합니다.`);
+  if (response.status === 200){
+    console.log(response);
+  }
+};
+
+export const signUp = async (email, name, code, password, navigation) => {
+  const response = await axios.post(`${URL}/register`, {email, name, code, password});
+  if (response.status === 200){
+    console.log(response);
+    navigation.navigate('Login');
+  }
+};
+
+
 const getTokenFromLocal = async () => {
   try {
     const value = await AsyncStorage.getItem("Tokens");
