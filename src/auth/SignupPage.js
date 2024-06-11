@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react';
+import React, { useState, createRef, useEffect } from 'react';
 import { Button, Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import axios from 'axios';
@@ -10,7 +10,10 @@ const SignupPage = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [passwordChk, setPasswordChk] = useState('');
   const [userName, setUserName] = useState('');
+  const [phoneNumber, setphoneNumber] = useState('');
   const [authCode, setAuthCode] = useState('');
+  const [errors, setErrors] = useState({}); 
+  const [isFormValid, setIsFormValid] = useState(false); 
 
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
@@ -22,7 +25,48 @@ const SignupPage = ({ navigation }) => {
   const passwordInputRef = createRef();
   const passwordChkInputRef = createRef();
   const nameInputRef = createRef();
+  const phoneInputRef = createRef();
 
+  useEffect(() => { 
+    validateForm(); 
+  }, [email, authCode, userName, phoneNumber, password, passwordChk]);
+
+  function onPhoneChanged(text) {
+    setphoneNumber(text.replace(/[^0-9]/g, ''));
+  };
+
+  function validateForm() { 
+    const errors = {}; 
+
+    // Validate name field 
+
+
+    // Validate email field 
+    if (!email) { 
+        errors.email = 'Email is required.'; 
+    } else if (!/\S+@\S+\.\S+/.test(email)) { 
+        errors.email = 'Email is invalid.'; 
+    }
+    if (!authCode) { 
+      errors.name = 'authCode is required.'; 
+    }
+    if (!userName) { 
+      errors.name = 'Name is required.'; 
+    }
+    if (!phoneNumber) { 
+      errors.name = 'phoneNumber is required.'; 
+    }
+    // Validate password field 
+    if (!password) { 
+        errors.password = 'Password is required.'; 
+    } else if (password.length < 8) { 
+        errors.password = 'Password must be at least 8 characters.'; 
+    } 
+
+    // Set the errors and update form validity 
+    setErrors(errors);
+    setIsFormValid(Object.keys(errors).length === 0); 
+  };
   return (
     // <View>
     //   <TextInput placeholder="E-mail" onChangeText={setEmail} />
@@ -60,6 +104,17 @@ const SignupPage = ({ navigation }) => {
           ref={nameInputRef}
           returnKeyType="next"
           onSubmitEditing={() =>
+            phoneInputRef.current && phoneInputRef.current.focus()
+          }
+          blurOnSubmit={false}
+        />
+        <TextInput
+          placeholder={'휴대전화번호'}
+          onChangeText={onPhoneChanged}
+          keyboardType="number-pad"
+          ref={phoneInputRef}
+          returnKeyType="next"
+          onSubmitEditing={() =>
             passwordInputRef.current && passwordInputRef.current.focus()
           }
           blurOnSubmit={false}
@@ -95,14 +150,19 @@ const SignupPage = ({ navigation }) => {
         </Text>
       ) : null}
       </View>
-      <Button style={{color: 'white', fontSize: wp('4%')}} title="Sign Up" onPress={() => signUp(email, userName, authCode, password)}></Button>
-      {/* <View style={{flex: 0.75}}>
-        <View style={styles.btnArea}>
-          <TouchableOpacity style={styles.btn} onPress={signUp}>
-            <Text style={{color: 'white', fontSize: wp('4%')}}>회원가입</Text>
-          </TouchableOpacity>
-        </View>
-      </View> */}
+      <Button
+        style={{color: 'white', fontSize: wp('4%')}}
+        title="Sign Up"
+        disabled={!isFormValid}
+        onPress={() => signUp(email, userName, phoneNumber, authCode, password, navigation)}
+      >
+        
+      </Button>
+      {Object.values(errors).map((error, index) => ( 
+          <Text key={index} style={styles.error}> 
+              {error} 
+          </Text> 
+      ))}
     </View>
   );
 };

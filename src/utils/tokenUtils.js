@@ -54,8 +54,8 @@ export const sendAuthCode = async (email) => {
   }
 };
 
-export const signUp = async (email, name, code, password, navigation) => {
-  const response = await axios.post(`${URL}/register`, {email, name, code, password});
+export const signUp = async (email, name, phone, code, password, navigation) => {
+  const response = await axios.post(`${URL}/register`, {email, name, phone, code, password});
   if (response.status === 200){
     console.log(response);
     navigation.navigate('Login');
