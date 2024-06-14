@@ -156,13 +156,7 @@ const SignupPage = ({ navigation }) => {
         disabled={!isFormValid}
         onPress={() => signUp(email, userName, phoneNumber, authCode, password, navigation)}
       >
-        
       </Button>
-      {Object.values(errors).map((error, index) => ( 
-          <Text key={index} style={styles.error}> 
-              {error} 
-          </Text> 
-      ))}
     </View>
   );
 };

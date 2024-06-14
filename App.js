@@ -8,9 +8,8 @@
 
 import React, { Component } from 'react';
 import {Node} from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import HomeTab from './src/HomeTab';
 import AuthStackNavigator from './src/auth/AuthStackNavigator';
+import Toast from 'react-native-toast-message';
 
 import {View} from 'react-native';
 
@@ -19,12 +18,8 @@ class App extends Component {
     return (
       <>
         <View style={{ flex: 1 }}>
-          <AuthStackNavigator>
-          
-          </AuthStackNavigator>
-          {/* <NavigationContainer>
-              <HomeTab />
-          </NavigationContainer> */}
+          <AuthStackNavigator />
+          <Toast />
         </View>
       </>
     );

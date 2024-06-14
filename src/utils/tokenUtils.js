@@ -1,13 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import { Toast } from "react-native-toast-message/lib/src/Toast";
+import Toast from "react-native-toast-message";
 import authStore from './authStore';
 
 const URL = 'http://192.168.0.3:58083'
 
-const showToast = (text) =>{
+const showToast = (type, text) =>{
     Toast.show({
-        type: 'error',
+        type: type,
         position: 'bottom',
         text1: text,
       });
@@ -28,10 +28,10 @@ export const signIn = async (email, password, navigation) => {
       }
     } catch (error) {
       if(error.response.status === 401){
-          showToast(error.response.data)
+          showToast("error", error.response.data)
       }
       else{
-          showToast("Ukown error")
+          showToast("error", "Ukown error")
       }
     }
 };
@@ -47,18 +47,28 @@ export const signOut = async (navigation, _setIsAuthenticated) => {
 };
 
 export const sendAuthCode = async (email) => {
-  const response = await axios.post(`${URL}/emails/send-authcode`, {email});
-  showToast("인증코드전송", `${email} 로 전송했습니다. 30분 내로 인증코드 메일이 도착합니다.`);
-  if (response.status === 200){
-    console.log(response);
+  try {
+    showToast("success", `${email} 로 인증코드를 전송했습니다. 30분 내로 메일이 도착합니다.`);
+    const response = await axios.post(`${URL}/emails/send-authcode`, {email});
+    if (response.status === 200){
+    }
+  }catch (error) {
+    console.log(error.response);
   }
 };
 
 export const signUp = async (email, name, phone, code, password, navigation) => {
-  const response = await axios.post(`${URL}/register`, {email, name, phone, code, password});
-  if (response.status === 200){
+  try {
+    const response = await axios.post(`${URL}/register`, {email, name, phone, code, password});
     console.log(response);
-    navigation.navigate('Login');
+    if (response.status === 200){
+      showToast("success", "회원가입이 완료되었습니다!");
+      navigation.navigate('Login');
+    }
+  }catch (error) {
+    if(error.response.data.message === "Member already registered."){
+      showToast("error", "이미 등록된 E-Mail 입니다.");
+    }
   }
 };
 
