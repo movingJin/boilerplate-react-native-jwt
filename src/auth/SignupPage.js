@@ -37,31 +37,28 @@ const SignupPage = ({ navigation }) => {
 
   function validateForm() { 
     const errors = {}; 
-
-    // Validate name field 
-
-
-    // Validate email field 
-    if (!email) { 
-        errors.email = 'Email is required.'; 
-    } else if (!/\S+@\S+\.\S+/.test(email)) { 
-        errors.email = 'Email is invalid.'; 
+    if (password !== passwordChk){
+      errors.message = '비밀번호가 일치하지 않습니다.'; 
     }
-    if (!authCode) { 
-      errors.name = 'authCode is required.'; 
-    }
-    if (!userName) { 
-      errors.name = 'Name is required.'; 
+    if (!password) { 
+      errors.message = '비밀번호를 입력하세요.'; 
+    } else if (password.length < 8) { 
+        errors.message = '비밀번호는 최소 8자 이상 입력해주세요.'; 
     }
     if (!phoneNumber) { 
-      errors.name = 'phoneNumber is required.'; 
+      errors.message = '핸드폰번호는 필수 입력입니다.'; 
     }
-    // Validate password field 
-    if (!password) { 
-        errors.password = 'Password is required.'; 
-    } else if (password.length < 8) { 
-        errors.password = 'Password must be at least 8 characters.'; 
-    } 
+    if (!userName) { 
+      errors.message = '닉네임은 필수 입력입니다.'; 
+    }
+    if (!authCode) {
+      errors.message = '인증코드는 필수 입력입니다. 입력하신 E-Mail로 인증코드를 발송해주세요.'; 
+    }
+    if (!email) {
+        errors.message = 'E-Mail은 필수 입력입니다.'; 
+    } else if (!/\S+@\S+\.\S+/.test(email)) { 
+        errors.message = 'E-Mail 형식이 아닙니다.'; 
+    }
 
     // Set the errors and update form validity 
     setErrors(errors);
@@ -75,29 +72,30 @@ const SignupPage = ({ navigation }) => {
     // </View>
     <View style={styles.container}>
       <View style={styles.formArea}>
-        <TextInput
-          placeholder={'E-Mail'}
-          onChangeText={setEmail}
-          ref={emailInputRef}
-          returnKeyType="next"
-          onSubmitEditing={() =>
-            codeInputRef.current && codeInputRef.current.focus()
-          }
-          blurOnSubmit={false}
-        />
-        <View style={styles.formCode}>
+        <View style={styles.formEmail}>
           <TextInput
-            placeholder={'보안코드를 입력하세요'}
-            onChangeText={setAuthCode}
-            ref={codeInputRef}
+            style={{width: 290}}
+            placeholder={'E-Mail'}
+            onChangeText={setEmail}
+            ref={emailInputRef}
             returnKeyType="next"
             onSubmitEditing={() =>
-              nameInputRef.current && nameInputRef.current.focus()
+              codeInputRef.current && codeInputRef.current.focus()
             }
             blurOnSubmit={false}
           />
           <Button style={styles.sendAuthCode} title="Send Code" onPress={() => sendAuthCode(email)} />
         </View>
+        <TextInput
+          placeholder={'보안코드를 입력하세요'}
+          onChangeText={setAuthCode}
+          ref={codeInputRef}
+          returnKeyType="next"
+          onSubmitEditing={() =>
+            nameInputRef.current && nameInputRef.current.focus()
+          }
+          blurOnSubmit={false}
+        />
         <TextInput
           placeholder={'닉네임'}
           onChangeText={setUserName}
@@ -144,9 +142,9 @@ const SignupPage = ({ navigation }) => {
       </View>
 
       <View style={{flex: 0.5, justifyContent: 'center'}}>
-      {password !== passwordChk ? (
+      {!isFormValid ? (
         <Text style={styles.TextValidation}>
-          비밀번호가 일치하지 않습니다.
+          {errors.message}
         </Text>
       ) : null}
       </View>
@@ -169,8 +167,9 @@ const styles = StyleSheet.create({
   formArea: {
     flex: 1
   },
-  formCode: {
-    flexDirection: 'row'
+  formEmail: {
+    flexDirection: 'row',
+    width: wp('100%')
   },
   sendAuthCode: {
     width: wp('10%'),

@@ -68,6 +68,8 @@ export const signUp = async (email, name, phone, code, password, navigation) => 
   }catch (error) {
     if(error.response.data.message === "Member already registered."){
       showToast("error", "이미 등록된 E-Mail 입니다.");
+    }else if(error.response.data.message === "Auth code is not valid."){
+      showToast("error", "인증코드가 유효하지 않습니다.");
     }
   }
 };
