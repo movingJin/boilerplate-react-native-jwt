@@ -13,6 +13,7 @@ const LoginPage = ({ navigation }) => {
       <TextInput placeholder="E-mail" onChangeText={setEmail} />
       <TextInput placeholder="Password" secureTextEntry={true} onChangeText={setPassword} />
       <Button title="Login" onPress={() => signIn(email, password, navigation)} />
+      <Button title="비밀번호찾기" onPress={() => navigation.navigate('FindPwd')} />
     </View>
   );
 };

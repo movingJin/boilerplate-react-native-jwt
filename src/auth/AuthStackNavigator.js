@@ -29,6 +29,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginPage from './LoginPage';
 import SignupPage from './SignupPage';
+import FindPwdPage from './FindPwdPage';
 import HomeTab from '../HomeTab';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MainDrawerNavigator from '../MainDrawerNavigator';
@@ -38,33 +39,13 @@ import About from '../settings/About';
 
 const Stack = createStackNavigator();
 
-// const AuthStackNavigator = () => {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator initialRouteName="Login">
-//         <Stack.Screen name="Login" component={LoginPage} />
-//         <Stack.Screen name="Home" component={HomeTab}
-//           options={({ navigation }) => ({
-//             title: 'Info Desk',
-//             headerLeft: (/*navigation*/) => (
-//               <IconButton
-//                 icon="menu"
-//                 onPress={() => console.log("testbug0")/*navigation.openDrawer()*/}
-//               />
-//             ),
-//           })}/>
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// };
-
-
 const AuthStackNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Main">
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="Signup" component={SignupPage} />
+        <Stack.Screen name="FindPwd" component={FindPwdPage} />
         <Stack.Screen name="Main" component={HomeTab}
           options={({ navigation }) => ({
             //headerShown: false
@@ -77,8 +58,8 @@ const AuthStackNavigator = () => {
                 onPress={() => navigation.navigate('Settings')} />
             ),
           })}/>
-          <Stack.Screen name="Settings" component={SettingPage} />
-          <Stack.Screen name="About" component={About} />
+        <Stack.Screen name="Settings" component={SettingPage} />
+        <Stack.Screen name="About" component={About} />
       </Stack.Navigator>
     </NavigationContainer>
   );

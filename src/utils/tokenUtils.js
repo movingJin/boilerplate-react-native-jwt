@@ -74,6 +74,24 @@ export const signUp = async (email, name, phone, code, password, navigation) => 
   }
 };
 
+export const findPwd = async (email, phone, code, navigation) => {
+  try {
+    const response = await axios.post(`${URL}/find-pwd`, {email, phone, code});
+    console.log(response);
+    if (response.status === 200){
+      showToast("success", "가입된 E-Mail로 임시비밀번호가 발송되었습니다!");
+      navigation.navigate('Login');
+    }
+  }catch (error) {
+    console.log(error.response);
+    if (error.response.status === 401){
+      showToast("error", "등록되지 않은 이용자정보입니다.");
+    }
+    if(error.response.data.message === "Auth code is not valid."){
+      showToast("error", "인증코드가 유효하지 않습니다.");
+    }
+  }
+};
 
 const getTokenFromLocal = async () => {
   try {

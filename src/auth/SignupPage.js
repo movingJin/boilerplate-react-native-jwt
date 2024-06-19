@@ -1,8 +1,6 @@
 import React, { useState, createRef, useEffect } from 'react';
 import { Button, Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { sendAuthCode, signUp } from '../utils/tokenUtils';
 
 const SignupPage = ({ navigation }) => {
