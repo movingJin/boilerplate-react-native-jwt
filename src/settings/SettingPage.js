@@ -70,24 +70,24 @@ export default class SettingPage extends Component{
                 <TouchableOpacity 
                     style={styles.wrapButton}
                     onPress={this._goToAbout.bind(this)}>
-                    <Text>🏅 About</Text>
+                    <Text>🏅 모두의 전세에 대해서</Text>
                 </TouchableOpacity>
                 {this.state.isAuthenticated ? (<>
                     <TouchableOpacity 
                         style={styles.wrapButton}
                         onPress={this._checkLogout.bind(this)}>
-                        <Text>🔓 Logout</Text>
+                        <Text>🔓 로그아웃</Text>
                     </TouchableOpacity>
                 </>) : (<>
                     <TouchableOpacity 
                         style={styles.wrapButton}
                         onPress={this._goToLogIn.bind(this)}>
-                        <Text>🔑 Login</Text>
+                        <Text>🔑 로그인</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style={styles.wrapButton}
                         onPress={this._goSignUp.bind(this)}>
-                        <Text>Sign Up</Text>
+                        <Text>회원가입</Text>
                     </TouchableOpacity>
                 </>)
                 }

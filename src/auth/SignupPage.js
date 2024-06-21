@@ -82,7 +82,7 @@ const SignupPage = ({ navigation }) => {
             }
             blurOnSubmit={false}
           />
-          <Button style={styles.sendAuthCode} title="Send Code" onPress={() => sendAuthCode(email)} />
+          <Button style={styles.sendAuthCode} title="인증코드 전송" onPress={() => sendAuthCode(email)} />
         </View>
         <TextInput
           placeholder={'보안코드를 입력하세요'}
@@ -148,7 +148,7 @@ const SignupPage = ({ navigation }) => {
       </View>
       <Button
         style={{color: 'white', fontSize: wp('4%')}}
-        title="Sign Up"
+        title="회원가입"
         disabled={!isFormValid}
         onPress={() => signUp(email, userName, phoneNumber, authCode, password, navigation)}
       >
