@@ -6,6 +6,7 @@ import { sendAuthCode, findPwd } from '../utils/tokenUtils';
 const FindPwdPage = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [phoneNumber, setphoneNumber] = useState('');
+  const [phoneMask, setphoneMask] = useState('');
   const [authCode, setAuthCode] = useState('');
   const [errors, setErrors] = useState({}); 
   const [isFormValid, setIsFormValid] = useState(false); 
@@ -24,8 +25,12 @@ const FindPwdPage = ({ navigation }) => {
     validateForm(); 
   }, [email, phoneNumber, authCode]);
 
-  function onPhoneChanged(text) {
-    setphoneNumber(text.replace(/[^0-9]/g, ''));
+  function onPhoneChanged(value) {
+    value = value.replace(/[^0-9]/g, '')
+    setphoneNumber(value);
+    value = value.replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
+      .replace(/(-{1,2})$/g, '');
+    setphoneMask(value);
   };
 
   function validateForm() { 
@@ -62,6 +67,7 @@ const FindPwdPage = ({ navigation }) => {
         <View style={styles.formEmail}>
           <TextInput
             placeholder={'휴대전화번호'}
+            value={phoneMask}
             onChangeText={onPhoneChanged}
             keyboardType="number-pad"
             ref={phoneInputRef}

@@ -9,6 +9,7 @@ const SignupPage = ({ navigation }) => {
   const [passwordChk, setPasswordChk] = useState('');
   const [userName, setUserName] = useState('');
   const [phoneNumber, setphoneNumber] = useState('');
+  const [phoneMask, setphoneMask] = useState('');
   const [authCode, setAuthCode] = useState('');
   const [errors, setErrors] = useState({}); 
   const [isFormValid, setIsFormValid] = useState(false); 
@@ -25,12 +26,22 @@ const SignupPage = ({ navigation }) => {
   const nameInputRef = createRef();
   const phoneInputRef = createRef();
 
+  // useEffect(() => { 
+  //   if (phoneNumber.length === 13) {
+  //     setphoneNumber(phoneNumber.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
+  //   }
+  // }, [phoneNumber]);
+
   useEffect(() => { 
     validateForm(); 
   }, [email, authCode, userName, phoneNumber, password, passwordChk]);
 
-  function onPhoneChanged(text) {
-    setphoneNumber(text.replace(/[^0-9]/g, ''));
+  function onPhoneChanged(value) {
+    value = value.replace(/[^0-9]/g, '')
+    setphoneNumber(value);
+    value = value.replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
+      .replace(/(-{1,2})$/g, '');
+    setphoneMask(value);
   };
 
   function validateForm() { 
@@ -106,6 +117,7 @@ const SignupPage = ({ navigation }) => {
         />
         <TextInput
           placeholder={'휴대전화번호'}
+          value={phoneMask}
           onChangeText={onPhoneChanged}
           keyboardType="number-pad"
           ref={phoneInputRef}
