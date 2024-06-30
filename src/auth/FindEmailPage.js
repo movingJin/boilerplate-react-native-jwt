@@ -1,10 +1,9 @@
 import React, { useState, createRef, useEffect } from 'react';
 import { Button, Text, TextInput, View, StyleSheet } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import { sendAuthCode, findPwd } from '../utils/tokenUtils';
+import { sendAuthCode, findEmail } from '../utils/tokenUtils';
 
-const FindPwdPage = ({ navigation }) => {
-  const [email, setEmail] = useState('');
+const FindEmailPage = ({ navigation }) => {
   const [phoneNumber, setphoneNumber] = useState('');
   const [phoneMask, setphoneMask] = useState('');
   const [authCode, setAuthCode] = useState('');
@@ -16,14 +15,13 @@ const FindPwdPage = ({ navigation }) => {
   const [errortext2, setErrortext2] = useState('');
   const [isRegistraionSuccess, setIsRegistraionSuccess] = useState(false);
 
-  const emailInputRef = createRef();
   const phoneInputRef = createRef();
   const codeInputRef = createRef();
 
 
   useEffect(() => { 
     validateForm(); 
-  }, [email, phoneNumber, authCode]);
+  }, [phoneNumber, authCode]);
 
   function onPhoneChanged(value) {
     value = value.replace(/[^0-9]/g, '')
@@ -38,11 +36,6 @@ const FindPwdPage = ({ navigation }) => {
     if (!phoneNumber) { 
       errors.message = '핸드폰번호는 필수 입력입니다.'; 
     }
-    if (!email) {
-        errors.message = 'E-Mail은 필수 입력입니다.'; 
-    } else if (!/\S+@\S+\.\S+/.test(email)) { 
-        errors.message = 'E-Mail 형식이 아닙니다.'; 
-    }
     // if (!authCode) {
     //   errors.message = '인증코드는 필수 입력입니다. 입력하신 E-Mail로 인증코드를 발송해주세요.'; 
     // }
@@ -53,17 +46,6 @@ const FindPwdPage = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.formArea}>
-        <TextInput
-          style={{width: 290}}
-          placeholder={'E-Mail'}
-          onChangeText={setEmail}
-          ref={emailInputRef}
-          returnKeyType="next"
-          onSubmitEditing={() =>
-            phoneInputRef.current && phoneInputRef.current.focus()
-          }
-          blurOnSubmit={false}
-        />
         <View style={styles.formPhone}>
           <TextInput
             placeholder={'휴대전화번호'}
@@ -100,9 +82,9 @@ const FindPwdPage = ({ navigation }) => {
       </View>
       <Button
         style={{color: 'white', fontSize: wp('4%')}}
-        title="임시비밀번호 발송"
+        title="Email(ID) 찾기"
         disabled={!isFormValid}
-        onPress={() => findPwd(email, phoneNumber, authCode, navigation)}
+        onPress={() => findEmail(phoneNumber, authCode, navigation)}
       >
       </Button>
     </View>
@@ -141,4 +123,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default FindPwdPage;
+export default FindEmailPage;

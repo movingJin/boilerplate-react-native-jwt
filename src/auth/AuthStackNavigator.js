@@ -30,6 +30,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginPage from './LoginPage';
 import SignupPage from './SignupPage';
 import FindPwdPage from './FindPwdPage';
+import FindEmailPage from './FindEmailPage';
+import FindEmailResultPage from './FindEmailResultPage';
 import HomeTab from '../HomeTab';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MainDrawerNavigator from '../MainDrawerNavigator';
@@ -43,9 +45,11 @@ const AuthStackNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Main">
-        <Stack.Screen name="Login" component={LoginPage} />
-        <Stack.Screen name="Signup" component={SignupPage} />
-        <Stack.Screen name="FindPwd" component={FindPwdPage} />
+        <Stack.Screen name="Login" component={LoginPage} options={{title: '로그인'}}/>
+        <Stack.Screen name="Signup" component={SignupPage} options={{title: '회원가입'}}/>
+        <Stack.Screen name="FindPwd" component={FindPwdPage} options={{title: '임시비밀번호 전송'}}/>
+        <Stack.Screen name="FindEmail" component={FindEmailPage} options={{title: 'E-Mail(Id) 찾기'}}/>
+        <Stack.Screen name="FindEmailResult" component={FindEmailResultPage} options={{title: 'E-Mail(Id) 찾기'}}/>
         <Stack.Screen name="Main" component={HomeTab}
           options={({ navigation }) => ({
             //headerShown: false

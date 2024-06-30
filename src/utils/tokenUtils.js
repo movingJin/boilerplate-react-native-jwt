@@ -74,6 +74,24 @@ export const signUp = async (email, name, phone, code, password, navigation) => 
   }
 };
 
+export const findEmail = async (phone, code, navigation) => {
+  try {
+    const response = await axios.post(`${URL}/find-email`, {phone, code});
+    console.log(response.data);
+    if (response.status === 200){
+      navigation.navigate('FindEmailResult', {email: response.data});
+    }
+  }catch (error) {
+    console.log(error.response);
+    if (error.response.status === 401){
+      showToast("error", "등록되지 않은 이용자정보입니다.");
+    }
+    if(error.response.data.message === "Auth code is not valid."){
+      showToast("error", "인증코드가 유효하지 않습니다.");
+    }
+  }
+};
+
 export const findPwd = async (email, phone, code, navigation) => {
   try {
     const response = await axios.post(`${URL}/find-pwd`, {email, phone, code});
