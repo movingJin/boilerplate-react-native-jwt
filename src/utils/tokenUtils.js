@@ -28,10 +28,10 @@ export const signIn = async (email, password, navigation) => {
       }
     } catch (error) {
       if(error.response.status === 401){
-          showToast("error", error.response.data)
+          showToast("error", "등록되지 않은 이용자정보입니다.");
       }
       else{
-          showToast("error", "Ukown error")
+          showToast("error", "Ukown error");
       }
     }
 };

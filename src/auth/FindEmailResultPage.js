@@ -1,4 +1,4 @@
-import React, { Component, useState, createRef, useEffect } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Button, Text, TextInput, View, StyleSheet } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 

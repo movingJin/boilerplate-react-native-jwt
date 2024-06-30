@@ -1,4 +1,4 @@
-import React, { useState, createRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button, Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { sendAuthCode, signUp } from '../utils/tokenUtils';
@@ -19,18 +19,12 @@ const SignupPage = ({ navigation }) => {
   const [errortext2, setErrortext2] = useState('');
   const [isRegistraionSuccess, setIsRegistraionSuccess] = useState(false);
 
-  const emailInputRef = createRef();
-  const codeInputRef = createRef();
-  const passwordInputRef = createRef();
-  const passwordChkInputRef = createRef();
-  const nameInputRef = createRef();
-  const phoneInputRef = createRef();
-
-  // useEffect(() => { 
-  //   if (phoneNumber.length === 13) {
-  //     setphoneNumber(phoneNumber.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
-  //   }
-  // }, [phoneNumber]);
+  const emailInputRef = useRef();
+  const codeInputRef = useRef();
+  const passwordInputRef = useRef();
+  const passwordChkInputRef = useRef();
+  const nameInputRef = useRef();
+  const phoneInputRef = useRef();
 
   useEffect(() => { 
     validateForm(); 

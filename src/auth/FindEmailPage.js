@@ -1,4 +1,4 @@
-import React, { useState, createRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button, Text, TextInput, View, StyleSheet } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { sendAuthCode, findEmail } from '../utils/tokenUtils';
@@ -15,8 +15,8 @@ const FindEmailPage = ({ navigation }) => {
   const [errortext2, setErrortext2] = useState('');
   const [isRegistraionSuccess, setIsRegistraionSuccess] = useState(false);
 
-  const phoneInputRef = createRef();
-  const codeInputRef = createRef();
+  const phoneInputRef = useRef();
+  const codeInputRef = useRef();
 
 
   useEffect(() => { 
@@ -24,7 +24,7 @@ const FindEmailPage = ({ navigation }) => {
   }, [phoneNumber, authCode]);
 
   function onPhoneChanged(value) {
-    value = value.replace(/[^0-9]/g, '')
+    value = value.replace(/[^0-9]/g, '');
     setphoneNumber(value);
     value = value.replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
       .replace(/(-{1,2})$/g, '');
@@ -100,7 +100,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   formPhone: {
-    flexDirection: 'row',
     width: wp('100%')
   },
   sendAuthCode: {
