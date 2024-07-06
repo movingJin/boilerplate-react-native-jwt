@@ -28,7 +28,7 @@ export const signIn = async (email, password, navigation) => {
       }
     } catch (error) {
       if(error.response.status === 401){
-          showToast("error", "등록되지 않은 이용자정보입니다.");
+          showToast("error", "패스워드가 올바르지 않거나 등록되지 않은 사용자입니다.");
       }
       else{
           showToast("error", "Ukown error");
@@ -107,6 +107,22 @@ export const findPwd = async (email, phone, code, navigation) => {
     }
     if(error.response.data.message === "Auth code is not valid."){
       showToast("error", "인증코드가 유효하지 않습니다.");
+    }
+  }
+};
+
+export const modifyInfo = async (name, phone, navigation) => {
+  try {
+    const accessToken = authStore.getState().accessToken;
+    const response = await axios.post(`${URL}/user/modify-info`, {name, phone}, {headers: {'Authorization': "Bearer " + accessToken}});
+    if (response.status === 200){
+      showToast("success", "회원정보가 수정되었습니다.");
+      navigation.goBack();
+    }
+  }catch (error) {
+    console.log(error.response);
+    if (error.response.status === 401){
+      showToast("error", "이용자정보가 올바르지 않습니다.");
     }
   }
 };

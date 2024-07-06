@@ -52,6 +52,10 @@ export default class SettingPage extends Component{
         this.props.navigation.navigate('Signup');
     }
 
+    _goModifyInfo(){
+        this.props.navigation.navigate('ModifyInfo');
+    }
+
     _checkLogout(){
         Alert.alert(
             "Alert",
@@ -73,6 +77,11 @@ export default class SettingPage extends Component{
                     <Text>🏅 모두의 전세에 대해서</Text>
                 </TouchableOpacity>
                 {this.state.isAuthenticated ? (<>
+                    <TouchableOpacity 
+                        style={styles.wrapButton}
+                        onPress={this._goModifyInfo.bind(this)}>
+                        <Text>회원정보 수정</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity 
                         style={styles.wrapButton}
                         onPress={this._checkLogout.bind(this)}>

@@ -32,6 +32,7 @@ import SignupPage from './SignupPage';
 import FindPwdPage from './FindPwdPage';
 import FindEmailPage from './FindEmailPage';
 import FindEmailResultPage from './FindEmailResultPage';
+import ModifyInfoPage from './ModifyInfoPage';
 import HomeTab from '../HomeTab';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MainDrawerNavigator from '../MainDrawerNavigator';
@@ -62,6 +63,7 @@ const AuthStackNavigator = () => {
                 onPress={() => navigation.navigate('Settings')} />
             ),
           })}/>
+          <Stack.Screen name="ModifyInfo" component={ModifyInfoPage} options={{title: '회원정보 수정'}}/>
         <Stack.Screen name="Settings" component={SettingPage} />
         <Stack.Screen name="About" component={About} />
       </Stack.Navigator>
