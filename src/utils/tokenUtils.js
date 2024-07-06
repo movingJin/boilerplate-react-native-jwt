@@ -13,7 +13,14 @@ const showToast = (type, text) =>{
       });
 };
 
-const {setAccessToken, setRefreshToken, setEmail, clearTokens} = authStore.getState();
+const {
+  setAccessToken,
+  setRefreshToken,
+  setEmail,
+  setName,
+  setPhone,
+  setRoles,
+  clearTokens} = authStore.getState();
 
 export const signIn = async (email, password, navigation) => {
     try {
@@ -24,6 +31,9 @@ export const signIn = async (email, password, navigation) => {
         setAccessToken(response.data.tokens.accessToken);
         setRefreshToken(response.data.tokens.refreshToken);
         setEmail(response.data.email);
+        setName(response.data.name);
+        setPhone(response.data.phone);
+        setRoles(response.data.roles);
         navigation.navigate('Main');
       }
     } catch (error) {
@@ -117,6 +127,8 @@ export const modifyInfo = async (name, phone, navigation) => {
     const response = await axios.post(`${URL}/user/modify-info`, {name, phone}, {headers: {'Authorization': "Bearer " + accessToken}});
     if (response.status === 200){
       showToast("success", "회원정보가 수정되었습니다.");
+      setName(response.data.name);
+      setPhone(response.data.phone);
       navigation.goBack();
     }
   }catch (error) {

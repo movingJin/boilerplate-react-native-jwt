@@ -16,6 +16,10 @@ const LoginPage = ({ navigation }) => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
+  useEffect(() => {
+    emailInputRef.current.focus();
+  }, [])
+  
   useEffect(() => { 
     validateForm(); 
   }, [email, password]);

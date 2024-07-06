@@ -25,8 +25,12 @@ const ModifyInfoPage = ({ navigation }) => {
   const phoneInputRef = useRef();
   useEffect(() => {
     const email = authStore.getState().email;
+    const name = authStore.getState().name;
+    const phone = authStore.getState().phone;
     setEmail(email);
-    //setUserName();
+    setUserName(name);
+    setphoneNumber(phone);
+    setphoneMask(phone.replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3'));
   }, []);
 
   useEffect(() => { 
@@ -71,6 +75,7 @@ const ModifyInfoPage = ({ navigation }) => {
         />
         <TextInput
           placeholder={'닉네임'}
+          value={userName}
           onChangeText={setUserName}
           ref={nameInputRef}
           returnKeyType="next"
