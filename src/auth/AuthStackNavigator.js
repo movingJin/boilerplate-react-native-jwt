@@ -35,7 +35,6 @@ import FindEmailResultPage from './FindEmailResultPage';
 import ModifyInfoPage from './ModifyInfoPage';
 import HomeTab from '../HomeTab';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import MainDrawerNavigator from '../MainDrawerNavigator';
 import SettingPage from '../settings/SettingPage'
 import About from '../settings/About';
 // import { IconButton } from 'react-native-paper';

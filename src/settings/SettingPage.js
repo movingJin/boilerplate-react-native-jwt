@@ -28,6 +28,7 @@ export default class SettingPage extends Component{
         }
     }
     componentDidUpdate(prevProps){
+        //componentDidUpdate 내에 setState함수를 쓰는 경우 주의, 문한반복이 발생할 수 있음.
         if(this.state.isAuthenticated !== prevProps.isAuthenticated){
 
         }
@@ -61,7 +62,7 @@ export default class SettingPage extends Component{
             "Alert",
             "Are you sure?",
             [
-                {text: 'ok', onPress: () => signOut(this.props.navigation, this._setIsAuthenticated)},
+                {text: 'ok', onPress: () => signOut(this._setIsAuthenticated)},
                 {text: 'cancel', onPress: () => null},
             ],
             { cancelable: true }

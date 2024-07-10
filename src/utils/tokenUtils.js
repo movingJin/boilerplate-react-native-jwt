@@ -46,13 +46,15 @@ export const signIn = async (email, password, navigation) => {
     }
 };
 
-export const signOut = async (navigation, _setIsAuthenticated) => {
+export const signOut = async (setIsAuthenticated) => {
   const accessToken = authStore.getState().accessToken;
   console.log(accessToken);
   const response = await axios.post(`${URL}/signout`, {}, {headers: {'Authorization': "Bearer " + accessToken}});
   if (response.status === 200){
     clearTokens();
-    _setIsAuthenticated(false);
+    if(setIsAuthenticated){
+      setIsAuthenticated(false);
+    }
   }
 };
 
