@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import Toast from "react-native-toast-message";
 import authStore from './authStore';
+import { StackActions } from '@react-navigation/native';
 
 const URL = 'http://192.168.0.3:58083'
 
@@ -34,7 +35,7 @@ export const signIn = async (email, password, navigation) => {
         setName(response.data.name);
         setPhone(response.data.phone);
         setRoles(response.data.roles);
-        navigation.navigate('Main');
+        navigation.reset({routes: [{name: "Main"}]});
       }
     } catch (error) {
       if(error.response.status === 401){
@@ -49,7 +50,7 @@ export const signIn = async (email, password, navigation) => {
 export const signOut = async (setIsAuthenticated) => {
   const accessToken = authStore.getState().accessToken;
   console.log(accessToken);
-  const response = await axios.post(`${URL}/signout`, {}, {headers: {'Authorization': "Bearer " + accessToken}});
+  const response = await axios.post(`${URL}/user/signout`, {}, {headers: {'Authorization': "Bearer " + accessToken}});
   if (response.status === 200){
     clearTokens();
     if(setIsAuthenticated){
@@ -60,9 +61,9 @@ export const signOut = async (setIsAuthenticated) => {
 
 export const sendAuthCode = async (email) => {
   try {
-    showToast("success", `${email} 로 인증코드를 전송했습니다. 30분 내로 메일이 도착합니다.`);
     const response = await axios.post(`${URL}/emails/send-authcode`, {email});
     if (response.status === 200){
+      showToast("success", `${email} 로 인증코드를 전송했습니다. 30분 내로 메일이 도착합니다.`);
     }
   }catch (error) {
     console.log(error.response);
@@ -75,6 +76,8 @@ export const signUp = async (email, name, phone, code, password, navigation) => 
     console.log(response);
     if (response.status === 200){
       showToast("success", "회원가입이 완료되었습니다!");
+      const popAction = StackActions.pop();
+      navigation.dispatch(popAction);
       navigation.navigate('Login');
     }
   }catch (error) {
@@ -141,57 +144,46 @@ export const modifyInfo = async (name, phone, navigation) => {
   }
 };
 
-const getTokenFromLocal = async () => {
-  try {
-    const value = await AsyncStorage.getItem("Tokens");
-    if (value !== null) {
-      return JSON.parse(value)
-    }
-    else{
-      return null;
-    }
-  } catch (e) {
-    console.log(e.message);
-  }
-};
-
-
 export const verifyTokens = async (navigation) => {
-  const Token = await getTokenFromLocal();
+  const accessToken = authStore.getState().accessToken;
+  const refreshToken = authStore.getState().refreshToken;
 
+  console.log("accessToken: " + accessToken);
+  console.log("refreshToken: " + refreshToken);
   // 최초 접속
-  if (Token === null){
-    navigation.reset({routes: [{name: "AuthPage"}]});
+  if (accessToken === null && refreshToken === null){
+    navigation.reset({routes: [{name: "Main"}]});
+    showToast("error", "로그인 정보가 없습니다.");
   }
   // 로컬 스토리지에 Token데이터가 있으면 -> 토큰들을 헤더에 넣어 검증 
   else{
     const headers_config = {
-      "refresh": Token.refreshToken,
-      Authorization: `Bearer ${Token.accessToken}`   
+      'Authorization': `Bearer ${accessToken}`,
+      'Refresh_Token': `Bearer ${refreshToken}`  
     };
 
     try {
-      const res = await axios.get(`${URL}/refresh`, {headers: headers_config})
-
-      // accessToken 만료, refreshToken 정상 -> 재발급된 accessToken 저장 후 자동 로그인
-      AsyncStorage.setItem('Tokens', JSON.stringify({
-        ...Token,
-        'accessToken': res.data.data.accessToken,
-      }))
-      navigation.reset({routes: [{name: "Main"}]});
-
-    } catch(error){
-      const code = error.response.data.code; 
-
-      // accessToken 만료, refreshToken 만료 -> 로그인 페이지
-      if(code === 401){
-        navigation.reset({routes: [{name: "AuthPage"}]});
+      const response = await axios.post(`${URL}/user/refresh`, {}, {headers: headers_config});
+      console.log(response.data);
+      if (response.status === 200){
+        setAccessToken(response.data.tokens.accessToken);
+        setRefreshToken(response.data.tokens.refreshToken);
+        setEmail(response.data.email);
+        setName(response.data.name);
+        setPhone(response.data.phone);
+        setRoles(response.data.roles);
       }
-      // accessToken 정상, refreshToken 정상 -> 자동 로그인
+    } catch (error) {
+      console.log(error);
+      if(error.response.status === 401){
+        showToast("error", "로그인정보가 만료되었습니다. 다시 로그인하시기 바랍니다.");
+      }else if(error.response.status === 400){
+        showToast("error", "로그인정보가 만료되었습니다.");
+      }
       else{
-        navigation.reset({routes: [{name: "Main"}]});
+        showToast("error", "Ukown error");
       }
     }
-
+    navigation.reset({routes: [{name: "Main"}]});
   }
 };

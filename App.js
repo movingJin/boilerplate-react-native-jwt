@@ -8,12 +8,13 @@
 
 import React, { Component } from 'react';
 import {View, PanResponder} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import AuthStackNavigator from './src/auth/AuthStackNavigator';
 import {signOut} from './src/utils/tokenUtils'
 import authStore from './src/utils/authStore';
 import Toast from 'react-native-toast-message';
 
-const TIME_TO_WAIT_FOR_INACTIVITY_MS = 10000;
+const TIME_TO_WAIT_FOR_INACTIVITY_MS = 1000 * 60 * 1000;
 const INACTIVITY_CHECK_INTERVAL_MS = 500;
 
 class App extends Component {
@@ -88,8 +89,9 @@ class App extends Component {
         <View
         style={{ flex: 1 }}
         {...this._panResponder.panHandlers}>
-
-          <AuthStackNavigator />
+          <NavigationContainer>
+            <AuthStackNavigator />
+          </NavigationContainer>
           <Toast />
         </View>
       </>

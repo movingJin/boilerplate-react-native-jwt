@@ -12,7 +12,7 @@ const authStore = create(
             phone: null,
             roles: null,
             setAccessToken: (value) => set({accessToken: value}),
-            setRefreshToken: (value) => set({accessToken: value}),
+            setRefreshToken: (value) => set({refreshToken: value}),
             setEmail: (value) => set({email: value}),
             setName: (value) => set({name: value}),
             setPhone: (value) => set({phone: value}),
