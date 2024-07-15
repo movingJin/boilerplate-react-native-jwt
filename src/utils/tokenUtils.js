@@ -147,7 +147,8 @@ export const modifyInfo = async (name, phone, navigation) => {
 export const verifyTokens = async (navigation) => {
   const accessToken = authStore.getState().accessToken;
   const refreshToken = authStore.getState().refreshToken;
-
+  clearTokens();
+  
   console.log("accessToken: " + accessToken);
   console.log("refreshToken: " + refreshToken);
   // 최초 접속
@@ -158,7 +159,7 @@ export const verifyTokens = async (navigation) => {
   // 로컬 스토리지에 Token데이터가 있으면 -> 토큰들을 헤더에 넣어 검증 
   else{
     const headers_config = {
-      'Authorization': `Bearer ${accessToken}`,
+      'Authorization': `dummy token to reissue`,
       'Refresh_Token': `Bearer ${refreshToken}`  
     };
 
@@ -175,9 +176,7 @@ export const verifyTokens = async (navigation) => {
       }
     } catch (error) {
       console.log(error);
-      if(error.response.status === 401){
-        showToast("error", "로그인정보가 만료되었습니다. 다시 로그인하시기 바랍니다.");
-      }else if(error.response.status === 400){
+      if(error.response.status === 400){
         showToast("error", "로그인정보가 만료되었습니다.");
       }
       else{
