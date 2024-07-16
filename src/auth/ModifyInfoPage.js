@@ -59,11 +59,6 @@ const ModifyInfoPage = ({ navigation }) => {
     setIsFormValid(Object.keys(errors).length === 0); 
   };
   return (
-    // <View>
-    //   <TextInput placeholder="E-mail" onChangeText={setEmail} />
-    //   <TextInput placeholder="Password" secureTextEntry={true} onChangeText={setPassword} />
-    //   <Button title="Login" onPress={() => signIn(email, password, navigation)} />
-    // </View>
     <View style={styles.container}>
       <View style={styles.formArea}>
         <TextInput
@@ -96,6 +91,9 @@ const ModifyInfoPage = ({ navigation }) => {
           }
           blurOnSubmit={false}
         />
+        <Button
+          title="비밀번호 재설정"
+          onPress={() => navigation.navigate('ModifyPwd')} />
       </View>
 
       <View style={{flex: 0.5, justifyContent: 'center'}}>

@@ -144,11 +144,27 @@ export const modifyInfo = async (name, phone, navigation) => {
   }
 };
 
+export const modifyPwd = async (oldPassword, newPassword, navigation) => {
+  try {
+    const accessToken = authStore.getState().accessToken;
+    const response = await axios.post(`${URL}/user/modify-pwd`, {oldPassword, newPassword}, {headers: {'Authorization': "Bearer " + accessToken}});
+    if (response.status === 200){
+      showToast("success", "비밀번호가 변경되었습니다.");
+      navigation.goBack();
+    }
+  }catch (error) {
+    console.log(error.response);
+    if (error.response.status === 401){
+      showToast("error", "이용자정보가 올바르지 않습니다.");
+    }
+  }
+};
+
 export const verifyTokens = async (navigation) => {
   const accessToken = authStore.getState().accessToken;
   const refreshToken = authStore.getState().refreshToken;
   clearTokens();
-  
+
   console.log("accessToken: " + accessToken);
   console.log("refreshToken: " + refreshToken);
   // 최초 접속
