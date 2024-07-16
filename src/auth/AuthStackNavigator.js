@@ -64,7 +64,7 @@ const AuthStackNavigator = () => {
           ),
         })}/>
         <Stack.Screen name="ModifyInfo" component={ModifyInfoPage} options={{title: '회원정보 수정'}}/>
-        <Stack.Screen name="ModifyPwd" component={ModifyPwdPage} options={{title: '비밀번호 수정'}}/>
+        <Stack.Screen name="ModifyPwd" component={ModifyPwdPage} options={{title: '비밀번호 재설정'}}/>
       <Stack.Screen name="Settings" component={SettingPage} />
       <Stack.Screen name="About" component={About} />
     </Stack.Navigator>
