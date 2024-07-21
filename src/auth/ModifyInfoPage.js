@@ -30,7 +30,9 @@ const ModifyInfoPage = ({ navigation }) => {
     setEmail(email);
     setUserName(name);
     setphoneNumber(phone);
-    setphoneMask(phone.replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3'));
+    if(phone){
+      setphoneMask(phone.replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3'));
+    }
   }, []);
 
   useEffect(() => { 

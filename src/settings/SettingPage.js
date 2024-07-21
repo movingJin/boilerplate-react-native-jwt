@@ -3,19 +3,23 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
     View,
     Text,
+    Modal,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     Alert,
     StyleSheet
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { signOut } from '../utils/tokenUtils';
 import authStore from '../utils/authStore';
+import WithdrawPage from '../auth/WithdrawPage';
 
 export default class SettingPage extends Component{
     constructor(props){
         super(props);
         this.state={
-            isAuthenticated: false
+            isAuthenticated: false,
+            isWithdrawModalVisible: false
         };
     }
     
@@ -53,19 +57,57 @@ export default class SettingPage extends Component{
         this.props.navigation.navigate('Signup');
     }
 
+    _goWithdraw(){
+        Alert.alert(
+            "회원탈퇴",
+            "회원탈퇴시 저장된 사용자정보는 삭제됩니다. 정말 탈퇴하시겠습니까?",
+            [
+                {text: '회원탈퇴', onPress: () => this.toggleModal()},
+                {text: '취소', onPress: () => null},
+            ],
+            { cancelable: true }
+        )
+        
+    }
+
     _goModifyInfo(){
         this.props.navigation.navigate('ModifyInfo');
     }
 
     _checkLogout(){
         Alert.alert(
-            "Alert",
-            "Are you sure?",
+            "로그아웃",
+            "로그아웃 하시겠습니까?",
             [
-                {text: 'ok', onPress: () => signOut(this._setIsAuthenticated)},
-                {text: 'cancel', onPress: () => null},
+                {text: '네', onPress: () => signOut(this._setIsAuthenticated)},
+                {text: '취소', onPress: () => null},
             ],
             { cancelable: true }
+        )
+    }
+
+    toggleModal = () => {
+        this.setState({
+            isWithdrawModalVisible: !this.state.isWithdrawModalVisible
+        });
+    };
+
+    popupWithdrawModal=()=>{
+        return(
+          <Modal
+          visible={this.state.isWithdrawModalVisible}
+          transparent={true}
+          animationType='slide'
+          onRequestClose={() => this.toggleModal()}
+          >
+            <TouchableOpacity style={styles.modelStyle} onPress={() => this.setState({isWithdrawModalVisible: false})}>
+                <TouchableWithoutFeedback onPress={() => {}}>
+                    <View style={styles.modelWrapperStyle}>
+                        <WithdrawPage navigation={this.props.navigation}/>
+                    </View>
+                </TouchableWithoutFeedback>
+            </TouchableOpacity>
+          </Modal>
         )
     }
 
@@ -88,6 +130,11 @@ export default class SettingPage extends Component{
                         onPress={this._checkLogout.bind(this)}>
                         <Text>🔓 로그아웃</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity 
+                        style={styles.wrapButton}
+                        onPress={this._goWithdraw.bind(this)}>
+                        <Text>회원탈퇴</Text>
+                    </TouchableOpacity>
                 </>) : (<>
                     <TouchableOpacity 
                         style={styles.wrapButton}
@@ -101,6 +148,7 @@ export default class SettingPage extends Component{
                     </TouchableOpacity>
                 </>)
                 }
+                {this.state.isWithdrawModalVisible && this.popupWithdrawModal()}
             </View>
         );
     }
@@ -118,5 +166,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderBottomWidth: 0.5,
         borderColor: '#ccc',
+    },
+    modelStyle: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
+    modelWrapperStyle: {
+        backgroundColor: '#ffffff',
+        padding: 20,
+        width: '80%',
+        height: '40%'
     }
 })

@@ -50,11 +50,18 @@ export const signIn = async (email, password, navigation) => {
 export const signOut = async (setIsAuthenticated) => {
   const accessToken = authStore.getState().accessToken;
   console.log(accessToken);
-  const response = await axios.post(`${URL}/user/signout`, {}, {headers: {'Authorization': "Bearer " + accessToken}});
-  if (response.status === 200){
-    clearTokens();
-    if(setIsAuthenticated){
-      setIsAuthenticated(false);
+  try{
+    const response = await axios.post(`${URL}/user/signout`, {}, {headers: {'Authorization': "Bearer " + accessToken}});
+    if (response.status === 200){
+      clearTokens();
+      if(setIsAuthenticated){
+        setIsAuthenticated(false);
+      }
+    }
+  }catch (error) {
+    console.log(error.response);
+    if (error.response.status === 401){
+      showToast("error", "이용자정보가 올바르지 않습니다.");
     }
   }
 };
@@ -200,5 +207,22 @@ export const verifyTokens = async (navigation) => {
       }
     }
     navigation.reset({routes: [{name: "Main"}]});
+  }
+};
+
+export const withdraw = async (password, navigation) => {
+  try {
+    const accessToken = authStore.getState().accessToken;
+    const response = await axios.post(`${URL}/user/withdraw`, {password}, {headers: {'Authorization': "Bearer " + accessToken}});
+    if (response.status === 200){
+      clearTokens();
+      showToast("success", "회원탈퇴 되었습니다.");
+      navigation.reset({routes: [{name: "Main"}]});
+    }
+  }catch (error) {
+    console.log(error.response);
+    if (error.response.status === 401){
+      showToast("error", "이용자정보가 올바르지 않습니다.");
+    }
   }
 };
