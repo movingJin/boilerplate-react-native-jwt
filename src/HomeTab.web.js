@@ -6,7 +6,7 @@ import News from './News'
 
 const Tab = createMaterialTopTabNavigator();
 
-const TabNavigation = () => {
+const HomeTabWeb = () => {
     return (
         <Tab.Navigator screenOptions={{ headerShown: false }}>
             <Tab.Screen
@@ -42,4 +42,4 @@ const TabNavigation = () => {
     );
 };
 
-export default TabNavigation;
+export default HomeTabWeb;
