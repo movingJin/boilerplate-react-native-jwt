@@ -7,10 +7,8 @@
  */
 
 import React, { Component } from 'react';
-import {Node} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-//import AuthStackNavigator from './src/auth/AuthStackNavigator';
-import HomeTabWeb from './src/HomeTab.web';
+import AuthStackNavigator from './src/auth/AuthStackNavigator';
 
 import {View} from 'react-native';
 
@@ -20,7 +18,7 @@ class App extends Component {
       <>
         <View style={{ flex: 1 }}>
           <NavigationContainer>
-              <HomeTabWeb />
+              <AuthStackNavigator />
           </NavigationContainer>
         </View>
       </>
