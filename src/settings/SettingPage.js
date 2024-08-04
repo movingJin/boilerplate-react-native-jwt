@@ -1,5 +1,5 @@
 import React, {Component, useState, useEffect} from 'react';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import customAlert from '../utils/customAlert' 
 import {
     View,
     Text,
@@ -24,7 +24,7 @@ export default class SettingPage extends Component{
     }
     
     componentDidMount(){
-        const {accessToken} = authStore.getState();
+        const accessToken = authStore.getState().accessToken;
         if (accessToken === null) {
             this.setState({isAuthenticated: false});
         } else {
@@ -58,7 +58,7 @@ export default class SettingPage extends Component{
     }
 
     _goWithdraw(){
-        Alert.alert(
+        customAlert(
             "회원탈퇴",
             "회원탈퇴시 저장된 사용자정보는 삭제됩니다. 정말 탈퇴하시겠습니까?",
             [
@@ -66,8 +66,7 @@ export default class SettingPage extends Component{
                 {text: '취소', onPress: () => null},
             ],
             { cancelable: true }
-        )
-        
+          );
     }
 
     _goModifyInfo(){
@@ -75,7 +74,7 @@ export default class SettingPage extends Component{
     }
 
     _checkLogout(){
-        Alert.alert(
+        customAlert(
             "로그아웃",
             "로그아웃 하시겠습니까?",
             [
@@ -83,7 +82,7 @@ export default class SettingPage extends Component{
                 {text: '취소', onPress: () => null},
             ],
             { cancelable: true }
-        )
+        );
     }
 
     toggleModal = () => {
