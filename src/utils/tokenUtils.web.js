@@ -1,4 +1,5 @@
-import customAlert from './customAlert' 
+import React, { useRef } from 'react';
+import customAlert from './customAlert';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import authStore from './authStore';
