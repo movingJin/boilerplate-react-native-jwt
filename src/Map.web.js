@@ -5,7 +5,7 @@ import {Pressable, View, Text, StyleSheet, Platform} from 'react-native';
 class Map extends Component {
   render(){
     return Platform.OS === "web" ? (
-      <iframe src="https://trading-bot.movingjin.com/" height={'100%'} width={'100%'} />
+      <iframe src="https://movingjin.tistory.com/" height={'100%'} width={'100%'} />
     ) : (
       <View style={styles.container}>
 
