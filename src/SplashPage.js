@@ -4,7 +4,12 @@ import { verifyTokens } from '../src/utils/tokenUtils';
 
 const SplashPage = ({navigation}) => {
     useEffect(()=>{
+      const timer = setTimeout(() => {
         verifyTokens(navigation);
+      }, 1000);
+      return () => {
+        clearTimeout(timer);
+      };
     },[])
     
   return (
