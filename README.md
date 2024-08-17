@@ -1,2 +1,2 @@
-# info-desk
-To provide GPT analysis and market information related to real estate
+# boilerplate-react-native-jwt
+To provide Boilerplate code with JWT authorization.
