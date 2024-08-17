@@ -10,7 +10,7 @@ include $(CLEAR_VARS)
 LOCAL_PATH := $(THIS_DIR)
 
 # You can customize the name of your application .so file here.
-LOCAL_MODULE := info_desk_appmodules
+LOCAL_MODULE := boilerplate_react_native_jwt_appmodules
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_SRC_FILES := $(wildcard $(LOCAL_PATH)/*.cpp)

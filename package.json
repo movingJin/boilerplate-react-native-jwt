@@ -1,5 +1,5 @@
 {
-  "name": "info_desk",
+  "name": "boilerplate_react_native_jwt",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -28,6 +28,7 @@
     "react": "17.0.2",
     "react-dom": "^17.0.2",
     "react-native": "0.68.2",
+    "react-native-eject": "^0.2.0",
     "react-native-geolocation-service": "^5.3.1",
     "react-native-gesture-handler": "^2.14.1",
     "react-native-maps": "^1.10.0",

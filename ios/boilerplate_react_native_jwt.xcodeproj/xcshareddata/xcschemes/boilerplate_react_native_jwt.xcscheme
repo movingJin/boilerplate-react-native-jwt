@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "info_desk.app"
-               BlueprintName = "info_desk"
-               ReferencedContainer = "container:info_desk.xcodeproj">
+               BuildableName = "boilerplate_react_native_jwt.app"
+               BlueprintName = "boilerplate_react_native_jwt"
+               ReferencedContainer = "container:boilerplate_react_native_jwt.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "info_deskTests.xctest"
-               BlueprintName = "info_deskTests"
-               ReferencedContainer = "container:info_desk.xcodeproj">
+               BuildableName = "boilerplate_react_native_jwtTests.xctest"
+               BlueprintName = "boilerplate_react_native_jwtTests"
+               ReferencedContainer = "container:boilerplate_react_native_jwt.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "info_desk.app"
-            BlueprintName = "info_desk"
-            ReferencedContainer = "container:info_desk.xcodeproj">
+            BuildableName = "boilerplate_react_native_jwt.app"
+            BlueprintName = "boilerplate_react_native_jwt"
+            ReferencedContainer = "container:boilerplate_react_native_jwt.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "info_desk.app"
-            BlueprintName = "info_desk"
-            ReferencedContainer = "container:info_desk.xcodeproj">
+            BuildableName = "boilerplate_react_native_jwt.app"
+            BlueprintName = "boilerplate_react_native_jwt"
+            ReferencedContainer = "container:boilerplate_react_native_jwt.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

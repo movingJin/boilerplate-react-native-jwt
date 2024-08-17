@@ -1,4 +1,4 @@
-package com.info_desk.newarchitecture;
+package com.boilerplate_react_native_jwt.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.info_desk.BuildConfig;
-import com.info_desk.newarchitecture.components.MainComponentsRegistry;
-import com.info_desk.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.boilerplate_react_native_jwt.BuildConfig;
+import com.boilerplate_react_native_jwt.newarchitecture.components.MainComponentsRegistry;
+import com.boilerplate_react_native_jwt.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

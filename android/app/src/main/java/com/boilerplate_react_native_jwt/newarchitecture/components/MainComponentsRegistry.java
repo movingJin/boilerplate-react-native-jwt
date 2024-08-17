@@ -1,4 +1,4 @@
-package com.info_desk.newarchitecture.components;
+package com.boilerplate_react_native_jwt.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

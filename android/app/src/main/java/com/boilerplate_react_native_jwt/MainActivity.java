@@ -1,4 +1,4 @@
-package com.info_desk;
+package com.boilerplate_react_native_jwt;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -12,7 +12,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "info_desk";
+    return "boilerplate_react_native_jwt";
   }
 
   /**

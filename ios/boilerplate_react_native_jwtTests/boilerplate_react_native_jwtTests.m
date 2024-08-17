@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface info_deskTests : XCTestCase
+@interface boilerplate_react_native_jwtTests : XCTestCase
 
 @end
 
-@implementation info_deskTests
+@implementation boilerplate_react_native_jwtTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {

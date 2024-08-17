@@ -29,7 +29,7 @@ const AuthStackNavigator = () => {
       <Stack.Screen name="Main" component={HomeTab}
         options={({ navigation }) => ({
           //headerShown: false
-          title: 'Info Desk',
+          title: 'Boilerplate JWT',
           headerLeft: false,
           headerRight: () => (
             <Icon 
