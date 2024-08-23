@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native'
+import { Platform, TouchableOpacity, Text } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
 import SplashPage from '../SplashPage';
 import LoginPage from './LoginPage';
@@ -19,7 +19,15 @@ const Stack = createStackNavigator();
 
 const AuthStackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName={Platform.OS === 'web' ? ("Main"): ("Splash")}>
+    <Stack.Navigator initialRouteName={Platform.OS === 'web' ? ("Main"): ("Splash")}
+      screenOptions={({ navigation }) => ({
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={{ color: '#000', fontSize: 18 }}>◀</Text>
+          </TouchableOpacity>
+        ),
+      })}
+      >
       <Stack.Screen name="Splash" options={{headerShown: false}} component={SplashPage} />
       <Stack.Screen name="Login" component={LoginPage} options={{title: '로그인'}}/>
       <Stack.Screen name="Signup" component={SignupPage} options={{title: '회원가입'}}/>
