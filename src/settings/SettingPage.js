@@ -122,7 +122,7 @@ export default class SettingPage extends Component{
                     <TouchableOpacity 
                         style={styles.wrapButton}
                         onPress={this._goModifyInfo.bind(this)}>
-                        <Text>회원정보 수정</Text>
+                        <Text>✏️ 회원정보 수정</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style={styles.wrapButton}
@@ -132,7 +132,7 @@ export default class SettingPage extends Component{
                     <TouchableOpacity 
                         style={styles.wrapButton}
                         onPress={this._goWithdraw.bind(this)}>
-                        <Text>회원탈퇴</Text>
+                        <Text>⚠️ 회원탈퇴</Text>
                     </TouchableOpacity>
                 </>) : (<>
                     <TouchableOpacity 
@@ -143,7 +143,7 @@ export default class SettingPage extends Component{
                     <TouchableOpacity 
                         style={styles.wrapButton}
                         onPress={this._goSignUp.bind(this)}>
-                        <Text>회원가입</Text>
+                        <Text>📝 회원가입</Text>
                     </TouchableOpacity>
                 </>)
                 }
